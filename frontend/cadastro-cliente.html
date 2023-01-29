@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro Cliente</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <!-- Link css -->
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <!-- Link js -->
+    <script src="./js/bootstrap.bundle.min.js" defer></script>
+    <!--Link icons-->
+    <script src="https://kit.fontawesome.com/232b6de587.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+
+    <header class="container-fluid text-center mt-5">
+      <h1> <a href="index.html">Easy Stock</a> </h1>
+    </header>
+
+    <main>
+      <!-- Início do formulário -->
+      <form method="post" action="autentica-cadastro.html" class="container-fluid mt-5 mb-5 flex-container">
+        <h2 class="text-center"> Cadastro Cliente </h2>
+        <section class="mt-4">
+          <!-- Username -->
+          <div class="mt-3 flex-container">
+            <i class="fa regular fa-user-plus icon" style="flex-grow: 1"></i>
+            <input type="text" id="user" name="user"  placeholder="Usuário" class="input" style="flex-grow: 9" required>
+          </div>
+          <!-- Nome -->
+          <div class="mt-3 flex-container">
+            <i class="fa fa-user icon" style="flex-grow: 1"></i>
+            <input type="text" id="nome" name="nome"  placeholder="Nome" class="input" style="flex-grow: 9" required>
+          </div>
+          <!-- CPF -->
+          <div class="mt-3 flex-container">
+            <!-- Máscara CPF -->
+            <script>
+              function mascara(i){
+              
+                var v = i.value;
+                
+                if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
+                    i.value = v.substring(0, v.length-1);
+                    return;
+                }
+                
+                i.setAttribute("maxlength", "14");
+                if (v.length == 3 || v.length == 7) i.value += ".";
+                if (v.length == 11) i.value += "-";
+
+              }
+            </script>
+            <i class="fa fa-address-card icon" style="flex-grow: 1"></i>
+            <input oninput="mascara(this)" type="text" id="cpf" name="cpf"  placeholder="CPF" class="input" style="flex-grow: 9" required> 
+          </div>
+          <!-- Endereço -->
+          <div class="mt-3 flex-container">
+            <i class="fa fa-map-location-dot icon" style="flex-grow: 1"></i>
+            <input type="text" id="endereco" name="endereco"  placeholder="Endereço" class="input" style="flex-grow: 9" required> 
+          </div>
+          <!-- Senha -->
+          <div class="mt-3 flex-container">
+            <i class="fas fa-lock icon" style="flex-grow: 1"></i>
+            <input type="password" id="senha" name="senha" placeholder="Senha"
+             class="input" style="flex-grow: 9" required>
+          </div>
+          <!-- Confirmar senha -->
+          <div class="mt-3 flex-container">
+            <i class="fas fa-lock icon" style="flex-grow: 1"></i>
+            <input type="password" id="confirmar-senha" name="senha" placeholder="Confirmar Senha"
+             class="input" style="flex-grow: 9" required>
+          </div>
+        </section>
+
+        <!-- Botões -->
+        <section class="mt-5">
+          <button type="submit"> Cadastrar </button>
+        </section>
+        
+      </form><!-- Fim do formulário -->
+    </main>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+main{
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+}
+
+a{
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 48px;
+  color: #1532EE;
+  text-decoration: none;
+
+}
+
+a:hover{
+  color: #1177EA;
+
+}
+
+body{
+  min-width: 370px; /*Largura mínima para não "quebrar"*/
+}
+
+h1{
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 48px;
+}
+
+
+h2{
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 48px;
+}
+
+p{
+  font-family: Roboto;
+  display: inline;
+}
+
+::placeholder {
+  color: rgb(70, 70, 70);
+  font-weight: normal;
+  text-align: left;
+}
+::-webkit-input-placeholder { /* Edge */
+  color: rgb(70, 70, 70);
+  font-weight: normal;
+  text-align: left;
+}
+
+button{
+  font-family: Roboto;
+  font-size:20px;
+  text-transform: uppercase;
+  border-radius: 100px;
+  height: 40px;
+  width: 100%;
+  background-color: #1532EE;
+  border: 0;
+  color: white;
+  margin: 10px 0px;
+  display: block;
+  outline: 0;
+  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.3);
+}
+
+button:hover{
+  background-color:  #1177ea;
+  border-color: #1177EA;
+  color: #000;
+}
+
+form{
+    max-width: 450px;
+    width: 100%;
+    text-align: left;
+    align-items: left;
+    flex-direction:column; 
+}
+
+.flex-container{
+  display: flex;
+}
+
+.icon{
+  text-align: center;
+  font-size: 35px;
+  margin-right: 10px;
+}
+
+.input{
+    border: none;
+    border-bottom: 1px solid black;
+    margin-left: 5px;
+    outline: 0;
+    display: inline-block;
+}
+
+input[type='radio'] {
+  appearance: none;
+  background: #c4c4c4;
+  outline: 0;
+  border: 0;
+  border-radius: 3px;
+  width: 15px;
+  height: 15px;
+  margin: 0px 12px 0px 6%;
+  cursor: pointer;
+}
+
+input[type='radio']:checked {
+  background: #1532EE;
+}
+
+label{
+  cursor: pointer;
+  padding-top: 10px;
+}
