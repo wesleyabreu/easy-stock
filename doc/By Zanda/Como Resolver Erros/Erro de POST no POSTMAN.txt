@@ -1,0 +1,1 @@
+Quando for fazer POST no Postman, enviar TUDO com " " como se fosse String
