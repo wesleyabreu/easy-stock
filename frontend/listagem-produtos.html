@@ -13,6 +13,38 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
   <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+        
+          <!-- BRAND -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" onclick="document.location='painel-cliente.html'">Conta Cliente</a>
+          </div>
+            
+          <!-- COLLAPSIBLE NAVBAR -->
+          <div class="collapse navbar-collapse" id="alignment-example">
+            
+            <!-- Links -->
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produtos<span class="caret"></span></a>
+                <ul class="dropdown-menu" aria-labelledby="about-us">
+                  <li><a href="#" onclick="document.location='listagem-produtos.html'">Ver Produtos </a></li>
+                  <li><a href="#" onclick="document.location='carrinho-compras.html'">Ver Carrinho de Compras</a></li>
+                  <li><a href="#" onclick="document.location='pedidos.html'">Ver Pedidos</a></li>
+                </ul>
+              </li>
+              <li><a href="#" class="sair" type="submit" onclick="document.location='login.html'">Sair</a></li>
+            </ul>        
+          </div>      
+        </div>
+      </nav>
     <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
@@ -21,7 +53,7 @@
 						<h2>Listagem <b>Produtos</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="carrinho-compras.html" class="btn btn-info" data-toggle="modal"><i class="material-icons">shopping_cart</i> <span>Ver Carrinho</span></a>
+						<a href="carrinho-compras.html" class="btn btn-info" data-toggle="submit"><i class="material-icons">shopping_cart</i> <span>Ver Carrinho</span></a>
 					</div>
                 </div>
             </div>
