@@ -31,7 +31,7 @@ public class Usuario {
     @Column ( name = "tipo_conta")
     private String tipo_conta;
 
-    // Getters and Setters
+    // Getters and Setters a
 
     public String getUsername() {
         return username;
