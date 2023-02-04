@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.easy.stock.model.Usuario;
 import com.easy.stock.repository.Dao;
@@ -40,5 +41,28 @@ public class Autenticacao {
 
         return "login";   // Onde vai após o cadastro
     }
+
+    // Autenticar o LOGIN
+    @PostMapping("/autenticar")
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model) { // Esses parâmetros são os que são passados no FORM do HTML
+
+    Usuario user = dao.findByUsername(username);    // user =  objeto que recebe as infos do usuario no BD para comparar ( vai receber o usuario que for encontrado pelo "FindByUsername")
+
+    // Erro
+    if (user == null || !user.getPassword().equals(password)) {
+      model.addAttribute("message", "Incorrect username or password");
+      return "login";
+    }
+
+    // Conta cliente
+    else if(user.getTipo_conta().equals("Cliente")){
+        return "painel-cliente";
+    }
+
+    //Conta Vendedor
+    else{
+        return "painel-vendedor";
+    }
+  }
 
 }

@@ -16,12 +16,12 @@
   <div class="text-center mt-5">
     <a href="index.html"> <h1 class="h1-lg">Easy Stock</h1> </a>
     <h2 class="h2-lg"> Entrar </h2>
-    <form method="post" action="autentica-login.html" class="form-center-signin">
+    <form method="post" action="#" th:action="@{/autenticar}" class="form-center-signin">
       <div class="input-container">
-        <input type="text" name="usuario" id="usuario" class="input" placeholder="Usuário" required>
+        <input type="text" id="usuario" name="username" class="input" placeholder="Usuário" required>
       </div>
       <div class="input-container">
-        <input type="password" name="senha" id="senha" class="input" placeholder="Senha" required> 
+        <input type="password" id="senha" name="password" class="input" placeholder="Senha" required> 
       </div>
       <button type="submit"> Login </button>
       <div class="input-container-h5 mt-3">
