@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en"></html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -61,61 +62,75 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Heineken</td>
-                        <td>Cerveja puro malte 300ml</td>
-						<td>6.00</td>
-                        <td>10</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Deletar">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Heineken</td>
-                        <td>Cerveja puro malte 300ml</td>
-						<td>6.00</td>
-                        <td>10</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Deletar">&#xE872;</i></a>
-                        </td>
-                    </tr>
-					<tr>
-                        <td>3</td>
-                        <td>Heineken</td>
-                        <td>Cerveja puro malte 300ml</td>
-						<td>6.00</td>
-                        <td>10</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Deletar">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Heineken</td>
-                        <td>Cerveja puro malte 300ml</td>
-						<td>6.00</td>
-                        <td>10</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Deletar">&#xE872;</i></a>
-                        </td>
-                    </tr>					
-					<tr>
-                        <td>5</td>
-                        <td>Heineken</td>
-                        <td>Cerveja puro malte 300ml</td>
-						<td>6.00</td>
-                        <td>10</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Deletar">&#xE872;</i></a>
-                        </td>
-                    </tr> 
+					<div th:each="produto: ${produtos}">
+						<tr>
+							<td th:text="${produto.id}" />
+							<td th:text="${produto.nome}" />
+							<td th:text="${produto.descricao}" />
+							<td th:text="${produto.preco}" />
+							<td th:text="${produto.estoque}" />
+							<td>
+								<a th:href="@{#editEmployeeModal{id}(id=${produto.id})}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+								<a th:href="@{#deleteEmployeeModal{id}(id=${produto.id})}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Deletar">&#xE872;</i></a>
+							</td>
+						</tr>
+						<!-- Editar Modal -->
+						<div th:id="'editEmployeeModal'+${produto.id}" class="modal fade">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<form method="post" th:action="@{/editar-produto/{id}(id=${produto.id})}" >
+										<div class="modal-header">						
+											<h4 class="modal-title">Editar Produto</h4>
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										</div>
+										<div class="modal-body">			
+											<div class="form-group">
+												<label>Nome</label>
+												<input type="text" name="nome" class="form-control" th:value="${produto.nome}" required>
+											</div>
+											<div class="form-group">
+												<label>Descrição</label>
+												<textarea class="form-control" name="descricao" th:text="${produto.descricao}" required></textarea>
+											</div>
+											<div class="form-group">
+												<label>Preço</label>
+												<input type="number" name="preco" class="form-control" th:value="${produto.preco}" required>
+											</div>
+											<div class="form-group">
+												<label>Estoque</label>
+												<input type="number" name="estoque" class="form-control" th:value="${produto.preco}" required>
+											</div>					
+										</div>
+										<div class="modal-footer">
+											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+											<input type="submit" class="btn btn-info" value="Salvar">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- Delete Modal -->
+						<div th:id="'deleteEmployeeModal'+${produto.id}" class="modal fade">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<form method="post" th:action="@{/deletar-produto/{id}(id=${produto.id})}" >
+										<div class="modal-header">						
+											<h4 class="modal-title">Deletar Produto</h4>
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										</div>
+										<div class="modal-body">					
+											<p>Você tem certeza que deseja apagar esse produto?</p>
+											<p class="text-warning"><small>Essa ação não pode ser desfeita.</small></p>
+										</div>
+										<div class="modal-footer">
+											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+											<input type="submit" class="btn btn-danger" value="Deletar">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
                 </tbody>
             </table>
         </div>
@@ -132,81 +147,24 @@
 					<div class="modal-body">					
 						<div class="form-group">
 							<label>Nome</label>
-							<input type="text" class="form-control" required>
+							<input type="text" name="nome" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Descrição</label>
-							
-                            <textarea class="form-control" required></textarea>
+                            <textarea class="form-control" name="descricao" required></textarea>
 						</div>
 						<div class="form-group">
 							<label>Preço</label>
-							<input type="number" class="form-control" required>
+							<input type="number" name="preco" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Estoque</label>
-							<input type="number" class="form-control" required>
+							<input type="number" name="estoque" class="form-control" required>
 						</div>					
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
 						<input type="submit" class="btn btn-success" value="Cadastrar">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- Editar Modal -->
-	<div id="editEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Editar Produto</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">			
-						<div class="form-group">
-							<label>Nome</label>
-							<input type="text" class="form-control" value="Heineken" required>
-						</div>
-						<div class="form-group">
-							<label>Descrição</label>
-                            <textarea class="form-control" required>Cerveja puro malte 300ml</textarea>
-						</div>
-						<div class="form-group">
-							<label>Preço</label>
-							<input type="number" class="form-control" value="6.00" required>
-						</div>
-						<div class="form-group">
-							<label>Estoque</label>
-							<input type="number" class="form-control" value="10" required>
-						</div>					
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-info" value="Salvar">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- Delete Modal -->
-	<div id="deleteEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Deletar Produto</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">					
-						<p>Você tem certeza que deseja apagar esse produto?</p>
-						<p class="text-warning"><small>Essa ação não pode ser desfeita.</small></p>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-danger" value="Deletar">
 					</div>
 				</form>
 			</div>

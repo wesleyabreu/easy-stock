@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en"></html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -25,7 +26,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" onclick="document.location='painel-cliente.html'">Conta Cliente</a>
+          <a class="navbar-brand" href="#" onclick="document.location='painel-cliente'">Conta Cliente</a>
         </div>
           
         <!-- COLLAPSIBLE NAVBAR -->
@@ -36,8 +37,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produtos<span class="caret"></span></a>
               <ul class="dropdown-menu" aria-labelledby="products">
-                <li><a href="#" onclick="document.location='listagem-produtos.html'">Ver Produtos </a></li>
-                <li><a href="#" onclick="document.location='carrinho-compras.html'">Ver Carrinho de Compras</a></li>
+                <li><a href="#" onclick="document.location='listagem-produtos'">Ver Produtos </a></li>
+                <li><a href="#" onclick="document.location='carrinho-compras'">Ver Carrinho de Compras</a></li>
                 <li><a href="#" onclick="document.location='#'">Ver Pedidos</a></li>
               </ul>
             </li>
@@ -66,153 +67,137 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>6.00</td>
-                        <td style="color:goldenrod">Pendente</td>
-                        <td>
-                            <a href="#detailsModal" class="details" data-toggle="modal"><i class="material-icons" title="Detalhes do pedido">view_list</i></a>
-                            <a href="#payModal" class="pay" data-toggle="modal"><i class="material-icons" title="Pagar PIX">pix</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12.00</td>
-                        <td style="color:green">Pago</td>
-                        <td>
-                            <a href="#viewNoteModal" class="viewNote" data-toggle="modal"><i class="material-icons" title="Ver nota fiscal">request_quote</i></a>
-                        </td>
-                    </tr>
+                    <div th:each="pedido: ${pedidos}" >
+                        <tr>
+                            <td th:text="${pedido.id}" />
+                            <td th:text="${pedido.valor}" />
+                            <td th:if="${pedido.pagamento_status == 'Pendente'}" style="color:goldenrod">Pendente</td>
+                            <td th:if="${pedido.pagamento_status == 'Pago'}" style="color:green">Pago</td>
+                            <td>
+                                <a th:if="${pedido.pagamento_status == 'Pendente'}" th:href="@{#detailsModal{id}(id=${pedido.id})}" class="details" data-toggle="modal"><i class="material-icons" title="Detalhes do pedido">view_list</i></a>
+                                <a th:if="${pedido.pagamento_status == 'Pendente'}" th:href="@{#payModal{id}(id=${pedido.id})}" class="pay" data-toggle="modal"><i class="material-icons" title="Pagar PIX">pix</i></a>
+                                <a th:if="${pedido.pagamento_status == 'Pago'}" th:href="@{#viewNoteModal{id}(id=${pedido.id})}" class="viewNote" data-toggle="modal"><i class="material-icons" title="Ver nota fiscal">request_quote</i></a>
+                            </td>
+                        </tr>
+                        <!-- Modal detalhes pedido -->
+                        <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'detailsModal'+${produto.id}" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form>
+                                        <div class="modal-header">						
+                                            <h4 class="modal-title">Detalhes Pedido</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">	
+                                            <div class="form-group">
+                                                <label style="width:65px;display:inline" >ID Pedido</label>
+                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${pedido.id}" readonly>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Produto ID</th>
+                                                            <th>Nome</th>
+                                                            <th>Descrição</th>
+                                                            <th>Valor</th>
+                                                        </tr>
+                                                    </thead>
+                                                </div>
+                                                <div>
+                                                    <tr th:each="produto: ${produtos}">
+                                                        <td th:text="${produto.id}" />
+                                                        <td th:text="${produto.nome}" />
+                                                        <td th:text="${produto.descricao}" />
+                                                        <td th:text="${produto.preco}" />
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Total Pedido</label>
+                                                <input style="width:70px;display:inline" type="text" class="form-control pull-right" th:value="${pedido.valor}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal nota fiscal -->
+                        <div th:if="${pedido.pagamento_status == 'Pago'}" th:id="'viewNoteModal'+${produto.id}" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form>
+                                        <div class="modal-header">						
+                                            <h4 class="modal-title">Dados Nota Fiscal</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">	
+                                            <div class="form-group">
+                                                <label style="width:65px;display:inline">ID Nota</label>
+                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${pedido.id_nota}" readonly>
+                                                <label style="width:65px;display:inline" >ID Pedido</label>
+                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${pedido.id_pedido}" readonly>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Produto ID</th>
+                                                            <th>Nome</th>
+                                                            <th>Descrição</th>
+                                                            <th>Valor</th>
+                                                        </tr>
+                                                    </thead>
+                                                </div>
+                                                <div>
+                                                    <tr th:each="produto: ${produtos}">
+                                                        <td th:text="${produto.id}" />
+                                                        <td th:text="${produto.nome}" />
+                                                        <td th:text="${produto.descricao}" />
+                                                        <td th:text="${produto.preco}" />
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Total Pedido</label>
+                                                <input style="width:70px;display:inline" type="text" class="form-control pull-right" th:value="${pedido.valor}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal pagamento -->
+                        <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'payModal'+${produto.id}" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="post" th:action="@{/pagar-pedido/{id}(id=${pedido.id})}" >
+                                        <div class="modal-header">						
+                                            <h4 class="modal-title">Efetuar Pagamento</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">					
+                                            <p>Deseja realizar o pagamento do pedido?</p>
+                                            <p class="text-warning"><small>Uma cobrança sera feita por PIX.</small></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                                            <input type="submit" class="btn btn-success" value="Pagar">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </tbody>
             </table>
         </div>
     </div>
-    <!-- Modal detalhes pedido -->
-	<div id="detailsModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Detalhes Pedido</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">	
-						<div class="form-group">
-                            <label style="width:65px;display:inline" >ID Pedido</label>
-                            <input style="width:65px;display:inline" type="text" class="form-control" value="1" readonly>
-						</div>
-                        <div class="modal-body">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Produto ID</th>
-                                        <th>Nome</th>
-                                        <th>Descrição</th>
-                                        <th>Valor</th>
-                                    </tr>
-                                </thead>
-                            </div>
-                            <div>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Heineken</td>
-                                    <td>Cerveja puro malte 300ml</td>
-                                    <td>6.00</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Heineken</td>
-                                    <td>Cerveja puro malte 300ml</td>
-                                    <td>6.00</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="form-group">
-                            <label>Total Pedido</label>
-                            <input style="width:70px;display:inline" type="text" class="form-control pull-right" value="12.00" readonly>
-                        </div>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-    <!-- Modal nota fiscal -->
-    <div id="viewNoteModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">						
-                        <h4 class="modal-title">Dados Nota Fiscal</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">	
-                        <div class="form-group">
-                            <label style="width:65px;display:inline">ID Nota</label>
-                            <input style="width:65px;display:inline" type="text" class="form-control" value="1" readonly>
-                            <label style="width:65px;display:inline" >ID Pedido</label>
-                            <input style="width:65px;display:inline" type="text" class="form-control" value="1" readonly>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Produto ID</th>
-                                        <th>Nome</th>
-                                        <th>Descrição</th>
-                                        <th>Valor</th>
-                                    </tr>
-                                </thead>
-                            </div>
-                            <div>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Heineken</td>
-                                    <td>Cerveja puro malte 300ml</td>
-                                    <td>6.00</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Heineken</td>
-                                    <td>Cerveja puro malte 300ml</td>
-                                    <td>6.00</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="form-group">
-                            <label>Total Pedido</label>
-                            <input style="width:70px;display:inline" type="text" class="form-control pull-right" value="12.00" readonly>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal pagamento -->
-    <div id="payModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Efetuar Pagamento</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">					
-						<p>Deseja realizar o pagamento do pedido?</p>
-						<p class="text-warning"><small>Uma cobrança sera feita por PIX.</small></p>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-success" value="Pagar">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
     </body>
 </html>

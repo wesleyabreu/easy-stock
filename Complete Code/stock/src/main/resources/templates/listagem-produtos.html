@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en"></html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -24,7 +25,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" onclick="document.location='painel-cliente.html'">Conta Cliente</a>
+            <a class="navbar-brand" href="#" onclick="document.location='painel-cliente'">Conta Cliente</a>
           </div>
             
           <!-- COLLAPSIBLE NAVBAR -->
@@ -35,9 +36,9 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produtos<span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="about-us">
-                  <li><a href="#" onclick="document.location='listagem-produtos.html'">Ver Produtos </a></li>
-                  <li><a href="#" onclick="document.location='carrinho-compras.html'">Ver Carrinho de Compras</a></li>
-                  <li><a href="#" onclick="document.location='pedidos.html'">Ver Pedidos</a></li>
+                  <li><a href="#" onclick="document.location='listagem-produtos'">Ver Produtos </a></li>
+                  <li><a href="#" onclick="document.location='carrinho-compras'">Ver Carrinho de Compras</a></li>
+                  <li><a href="#" onclick="document.location='pedidos'">Ver Pedidos</a></li>
                 </ul>
               </li>
               <li><a href="#" class="sair" type="submit" onclick="document.location='login.html'">Sair</a></li>
@@ -53,32 +54,21 @@
 						<h2>Listagem <b>Produtos</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="carrinho-compras.html" class="btn btn-info" data-toggle="submit"><i class="material-icons">shopping_cart</i> <span>Ver Carrinho</span></a>
+						<a href="carrinho-compras" class="btn btn-info" data-toggle="submit"><i class="material-icons">shopping_cart</i> <span>Ver Carrinho</span></a>
 					</div>
                 </div>
             </div>
             <table class="table table-striped table-hover">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-						<th>Preço</th>
-                        <th>Estoque</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Heineken</td>
-                        <td>Cerveja puro malte 300ml</td>
-						<td>6.00</td>
-                        <td>10</td>
-                        <td>
-                            <a href="#addCartModal" class="addCart" data-toggle="modal"><i class="material-icons" title="Adicionar ao carrinho">add_shopping_cart</i></a>
-
-                        </td>
+                    <tr th:each="produto: ${produtos}" >
+                      <td th:text="${produto.id}" />
+                      <td th:text="${produto.nome}" />
+                      <td th:text="${produto.descricao}" />
+                      <td th:text="${produto.preco}" />
+                      <td th:text="${produto.estoque}" />
+                      <td>
+                        <a href="#addCartModal" method="post" th:action="@{/add-carrinho/{id}(id=${produto.id})}" class="addCart" data-toggle="modal"><i class="material-icons" title="Adicionar ao carrinho">add_shopping_cart</i></a>
+                      </td>
                     </tr>
                 </tbody>
             </table>

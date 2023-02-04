@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en"></html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -25,16 +26,16 @@
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#" onclick="document.location='painel-vendedor.html'">Conta Vendedor</a>
+			<a class="navbar-brand" href="#" onclick="document.location='painel-vendedor'">Conta Vendedor</a>
 		  </div>
 			
 			
 			<!-- Links -->
 			<ul class="nav navbar-nav">
-			  <li><a href="#" class="sair" type="submit" onclick="document.location='gerenciar-produtos.html'">Gerenciar Produtos</a></li>
+			  <li><a href="#" class="sair" type="submit" onclick="document.location='gerenciar-produtos'">Gerenciar Produtos</a></li>
 			  <li><a href="#" class="sair" type="submit" onclick="document.location='#'">Ver Histórico de Vendas</a></li>
-			  <li><a href="#" class="sair" type="submit" onclick="document.location='cadastro-vendedor.html'">Cadastrar Vendedor</a></li>
-			  <li><a href="#" class="sair" type="submit" onclick="document.location='login.html'">Sair</a></li>
+			  <li><a href="#" class="sair" type="submit" onclick="document.location='cadastro-vendedor'">Cadastrar Vendedor</a></li>
+			  <li><a href="#" class="sair" type="submit" onclick="document.location='login'">Sair</a></li>
 			</ul>            
 		</div>
 	  </nav>
@@ -57,19 +58,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>12.00</td>
-                        <td>
-                            <a href="#detailsModal" class="details" data-toggle="modal"><i class="material-icons" title="Informações do pedido">info</i></a>
-                        </td>
-                    </tr>
+                    <div th:each="venda: ${vendas}">
+                        <tr>
+                            <td th:text="${venda.id}" />
+                            <td th:text="${venda.valor}" />
+                            <td>
+                                <a th:href="@{#detailsModal{id}(id=${venda.id})}" class="details" data-toggle="modal"><i class="material-icons" title="Informações do pedido">info</i></a>
+                            </td>
+                        </tr>
+                    </div>
                 </tbody>
             </table>
         </div>
     </div>
     <!-- Modal detalhes pedido -->
-	<div id="detailsModal" class="modal fade">
+	<div th:id="'detailsModal'+${venda.id}" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
@@ -80,9 +83,9 @@
 					<div class="modal-body">	
 						<div class="form-group">
                             <label style="width:65px;display:inline">ID Nota</label>
-                            <input style="width:65px;display:inline" type="text" class="form-control" value="1" readonly>
+                            <input style="width:65px;display:inline" type="text" class="form-control" th:value="${venda.id_nota}" readonly>
                             <label style="width:65px;display:inline" >ID Pedido</label>
-                            <input style="width:65px;display:inline" type="text" class="form-control" value="1" readonly>
+                            <input style="width:65px;display:inline" type="text" class="form-control" value="${venda.id}" readonly>
 						</div>
                         <div class="modal-body">
                             <table class="table table-striped table-hover">
@@ -94,36 +97,30 @@
                                         <th>Valor</th>
                                     </tr>
                                 </thead>
-                            </div>
-                            <div>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Heineken</td>
-                                    <td>Cerveja puro malte 300ml</td>
-                                    <td>6.00</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Heineken</td>
-                                    <td>Cerveja puro malte 300ml</td>
-                                    <td>6.00</td>
-                                </tr>
+                                <tbody>
+                                    <tr th:each="produto: ${produtos}">
+                                        <td th:text="${produto.id}" />
+                                        <td th:text="${produto.nome}" />
+                                        <td th:text="${produto.descricao}" />
+                                        <td th:text="${produto.preco}" />
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                         <div>
                             <label>Nome:</label>
-                            <p style="display: inline">Wesley</p>
+                            <p style="display: inline" th:text="${venda.comprador_nome}"></p>
                             </br>
                             <label>CPF:</label>
-                            <p style="display: inline">123.456.789-00</p>
+                            <p style="display: inline" th:text="${venda.comprador_cpf}"></p>
                             </br>
                             <label>Endereço:</label>
-                            <p style="display: inline">DCC UFLA</p>
+                            <p style="display: inline" th:text="${venda.comprador_endereco}"></p>
                             </br></br>
                         </div>
                         <div class="form-group">
                             <label>Total Pedido</label>
-                            <input style="width:70px;display:inline" type="text" class="form-control pull-right" value="12.00" readonly>
+                            <input style="width:70px;display:inline" type="text" class="form-control pull-right" th:value="${venda.valor}" readonly>
                         </div>
 					</div>
 					<div class="modal-footer">
