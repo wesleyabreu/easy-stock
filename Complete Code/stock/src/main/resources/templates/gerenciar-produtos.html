@@ -106,7 +106,7 @@
 											</div>
 											<div class="form-group">
 												<label>Estoque</label>
-												<input type="number" name="estoque" class="form-control" th:value="${produto.quantidade}" required>
+												<input type="number" name="quantidade" class="form-control" th:value="${produto.quantidade}" required>
 											</div>					
 										</div>
 										<div class="modal-footer">
@@ -121,7 +121,7 @@
 						<div th:id="'deleteEmployeeModal'+${produto.idProduto}" class="modal fade">
 							<div class="modal-dialog">
 								<div class="modal-content">
-									<form method="post" action="" th:action="@{/deletar-produto/{id}(id=${produto.idProduto})}" >
+									<form method="DELETE" action="" th:action="@{/deletar-produto/{id}(id=${produto.idProduto})}" >
 										<div class="modal-header">						
 											<h4 class="modal-title">Deletar Produto</h4>
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -147,7 +147,7 @@
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form method="post" action="/cadastrar-produto">
 					<div class="modal-header">						
 						<h4 class="modal-title">Cadastrar Produto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -167,7 +167,7 @@
 						</div>
 						<div class="form-group">
 							<label>Estoque</label>
-							<input type="number" name="estoque" class="form-control" required>
+							<input type="number" name="quantidade" class="form-control" required>
 						</div>					
 					</div>
 					<div class="modal-footer">

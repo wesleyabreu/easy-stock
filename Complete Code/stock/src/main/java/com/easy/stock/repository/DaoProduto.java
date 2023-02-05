@@ -8,5 +8,5 @@ import com.easy.stock.model.Produto;
 // Interface que extende o repositório CRUD do java SPRING
 
 public interface DaoProduto extends JpaRepository<Produto, Integer> {
-    
+    //Produto findById(Produto produto, Integer id);
 }

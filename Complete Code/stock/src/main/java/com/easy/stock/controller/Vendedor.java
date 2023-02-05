@@ -1,6 +1,7 @@
 package com.easy.stock.controller;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import com.easy.stock.repository.DaoUsuario;
 import com.easy.stock.model.Produto;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @Controller
@@ -80,5 +83,33 @@ public class Vendedor {
         return "gerenciar-produtos";
     }
     
+    // Adicionar Produtos
+    @PostMapping("/cadastrar-produto")
+    public String cadastrarProduto(@ModelAttribute Produto produto, Model model){
+
+        daoProduto.save(produto);
+
+        return "redirect:/gerenciar";
+        
+    }
+
+    // Deletar
+    @GetMapping("/deletar-produto/{id}")
+    public String excluirProduto( @PathVariable("id") Integer id ){
+
+        daoProduto.deleteById(id);
+        
+        return "redirect:/gerenciar";
+    }
+
+    // Editar produtos
+    @GetMapping("/editar-produto/{id}")
+    public String atualizarProduto( @PathVariable("id") Integer id ){
+
+        // Acrescentar aqui o código
+
+        return "redirect:/gerenciar";
+
+    }
 
 }
