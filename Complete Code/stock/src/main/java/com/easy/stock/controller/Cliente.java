@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 //import com.easy.stock.model.Produto;
-import com.easy.stock.repository.Dao;
+import com.easy.stock.repository.DaoUsuario;
 //import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,7 +14,7 @@ import com.easy.stock.repository.Dao;
 public class Cliente {
     
     @Autowired
-    private Dao dao;
+    private DaoUsuario dao;
 
     // Direcionar o usuário para SAIR
     
@@ -36,6 +36,19 @@ public class Cliente {
     public String clientePedidos(){
         return "pedidos";
     }
+
+    // Listar os produtos Disponíveis aos cliente
+
+    //@GetMapping("/todos-produtos")
+    //public String findAllById(List<Integer> id) {
+        
+    //    encontrados = new ArrayList<>(daoProduto.findAllById(id));
+    //
+    //    model.addAttribute("listaEncontrados", encontrados );
+    //
+    //    return "s";
+    //}
+
 
 
 }

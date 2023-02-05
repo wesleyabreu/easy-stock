@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.easy.stock.model.Usuario;
-import com.easy.stock.repository.Dao;
+import com.easy.stock.repository.DaoUsuario;
 
 // Controller da autenticação de usuário
 // HTML related: cadastro-cliente, login
@@ -19,7 +19,7 @@ import com.easy.stock.repository.Dao;
 public class Autenticacao {  
     
     @Autowired
-    private Dao dao;             // DAO =  DataBase Acess Object ( é através desse objeto que usamos funções do Repositório CRUD )
+    private DaoUsuario dao;             // DAO =  DataBase Acess Object ( é através desse objeto que usamos funções do Repositório CRUD )
     
     @GetMapping("/")                    // URL root "/" básica, vai carregar a "login" page HTML - Root, página fonte
     public String indexPage(){

@@ -1,5 +1,8 @@
 package com.easy.stock.controller;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,22 +11,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 import com.easy.stock.model.Usuario;
-import com.easy.stock.repository.Dao;
+import com.easy.stock.repository.DaoProduto;
+import com.easy.stock.repository.DaoUsuario;
+import com.easy.stock.model.Produto;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 public class Vendedor {
     
     @Autowired
-    private Dao dao;
+    private DaoProduto daoProduto;
+
+    @Autowired
+    private DaoUsuario daoUsuario;
+
+    private ArrayList<Produto> encontrados;
+
+    //private Model model;
 
     // Direcionar o usuário para SAIR
-    
 
-    // Direcionar o usuário para Gerenciar Produtos
-    @RequestMapping("/gerenciar")    
-    public String clienteProdutos(){
-        return "gerenciar-produtos";
-    }
 
     // Direcionar o usuário para Ver Carrinho
     @RequestMapping("/historico")    
@@ -42,9 +51,35 @@ public class Vendedor {
     public String userRegistration(@ModelAttribute Usuario usuario, Model model){
 
         usuario.setTipo_conta("Vendedor");   
-        dao.save(usuario);
+        daoUsuario.save(usuario);
 
         return "login";   
     }
+
+    // Listar todos os produtos
+    @GetMapping()
+    public String ListarTodosProdutos() {
+        
+        
+
+        return "0";
+    }
+
+    // Listar todos os produtos -- TESTAR ESSE AQUI -- DEVE TÁ ERRADO AINDA
+    @GetMapping("/gerenciar")
+    public String exibirTodos(Model model) {
+
+        encontrados = new ArrayList<>(daoProduto.findAll());
+
+        for (Produto p:encontrados) {
+            System.out.println(p.getNome());
+            System.out.println(p.getId_produto());
+        }
+
+        model.addAttribute("produtos", encontrados );
+
+        return "gerenciar-produtos";
+    }
+    
 
 }

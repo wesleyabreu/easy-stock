@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario extends Pessoa {
         
     @Id
     @Column ( name = "username")
@@ -17,15 +17,6 @@ public class Usuario {
 
     @Column ( name = "password")
     private String password;
-
-    @Column ( name = "nome")
-    private String nome;
-
-    @Column ( name = "cpf")
-    private String cpf;
-
-    @Column ( name = "endereco")
-    private String endereco;
 
     //@Enumerated(EnumType.STRING)        // Talvez remover isso aqui
     @Column ( name = "tipo_conta")
@@ -47,30 +38,6 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public String getTipo_conta() {
