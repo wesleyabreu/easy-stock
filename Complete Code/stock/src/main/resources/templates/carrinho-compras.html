@@ -37,12 +37,12 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produtos<span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="about-us">
-                  <li><a href="#" onclick="document.location='listagem-produtos'">Ver Produtos </a></li>
-                  <li><a href="#" onclick="document.location='carrinho-compras'">Ver Carrinho de Compras</a></li>
-                  <li><a href="#" onclick="document.location='pedidos'">Ver Pedidos</a></li>
+                  <li><a href="#" th:onclick="document.location='produtos'">Ver Produtos </a></li>
+                  <li><a href="#" th:onclick="document.location='carrinho'">Ver Carrinho de Compras</a></li>
+                  <li><a href="#" th:onclick="document.location='pedidos'">Ver Pedidos</a></li>
                 </ul>
               </li>
-              <li><a href="#" class="sair" type="submit" onclick="document.location='login.html'">Sair</a></li>
+              <li><a href="#" class="sair" type="submit" onclick="document.location='/'">Sair</a></li>
             </ul>        
           </div>      
         </div>
@@ -55,7 +55,7 @@
 						  <h2>Carrinho <b>Compras</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="painel-cliente" method="post" th:action="/efetuar-pedido" class="btn btn-success" data-toggle="submit"><i class="material-icons">shopping_cart_checkout</i> <span>Efetuar Pedido</span></a>
+						<a th:href="@{painel-cliente}" method="post" th:action="/efetuar-pedido" class="btn btn-success" data-toggle="submit"><i class="material-icons">shopping_cart_checkout</i> <span>Efetuar Pedido</span></a>
 					</div>
           </div>
             </div>

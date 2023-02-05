@@ -19,21 +19,26 @@ import com.easy.stock.repository.Dao;
 public class Autenticacao {  
     
     @Autowired
-    private Dao dao;    // DAO =  DataBase Acess Object ( é através desse objeto que usamos funções do Repositório CRUD )
+    private Dao dao;             // DAO =  DataBase Acess Object ( é através desse objeto que usamos funções do Repositório CRUD )
     
-    @GetMapping("/") // URL root "/" básica, vai carregar a "login" page HTML - Root, página fonte
+    @GetMapping("/")                    // URL root "/" básica, vai carregar a "login" page HTML - Root, página fonte
     public String indexPage(){
-        return "login"; // Esse return identifica o diretório "templates"
+        return "login";                 // Esse return identifica o diretório "templates"
+    }
+
+    @RequestMapping("/sair")    
+    public String userSair(){
+        return "login";
     }
 
     // Direcionar o usuário para o cadastro, caso ele não tenha 
-    @RequestMapping("/redirect")    // Endpoit que faz ação de redirecionar o cliente para o CADASTRO ( caso ele não tenha )
+    @RequestMapping("/redirect")        // Endpoit que faz ação de redirecionar o cliente para o CADASTRO ( caso ele não tenha )
     public String userRedirect(){
         return "cadastro-cliente";
     }
 
     // Registrar usuário - CLIENTE
-    @PostMapping("/cadastrar")  // Endepoint que faz ação de CADASTRAR o cliente
+    @PostMapping("/cadastrar")              // Endepoint que faz ação de CADASTRAR o cliente
     public String userRegistration(@ModelAttribute Usuario usuario, Model model){
 
         usuario.setTipo_conta("Cliente");   // Adiciona o atributo que o usuário não define ( seu tipo de conta)
@@ -50,7 +55,7 @@ public class Autenticacao {
 
     // Erro
     if (user == null || !user.getPassword().equals(password)) {
-      model.addAttribute("message", "Incorrect username or password");
+      model.addAttribute("message", "Usuário ou senha incorretos");
       return "login";
     }
 

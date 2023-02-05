@@ -26,15 +26,15 @@
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#" onclick="document.location='painel-vendedor.html'">Conta Vendedor</a>
+			<a class="navbar-brand" href="#" th:onclick="document.location='painel-vendedor'">Conta Vendedor</a>
 		  </div>
 			
 			
 			<!-- Links -->
 			<ul class="nav navbar-nav">
-			  <li><a href="#" class="sair" type="submit" onclick="document.location='historico-vendas-site.html'">Ver Histórico de Vendas</a></li>
-			  <li><a href="#" class="sair" type="submit" onclick="document.location='cadastro-vendedor.html'">Cadastrar Vendedor</a></li>
-			  <li><a href="#" class="sair" type="submit" onclick="document.location='login.html'">Sair</a></li>
+			  <li><a href="#" class="sair" type="submit" th:onclick="document.location='historico-vendas-site'">Ver Histórico de Vendas</a></li>
+			  <li><a href="#" class="sair" type="submit" th:onclick="document.location='cadastro-vendedor'">Cadastrar Vendedor</a></li>
+			  <li><a href="#" class="sair" type="submit" th:onclick="document.location='/">Sair</a></li>
 			</ul>            
 		</div>
 	  </nav>

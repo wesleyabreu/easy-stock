@@ -14,7 +14,7 @@
 <body>
 
   <div class="text-center mt-5">
-    <a href="index.html"> <h1 class="h1-lg">Easy Stock</h1> </a>
+    <a th:href="@{/}" > <h1 class="h1-lg">Easy Stock</h1> </a>
     <h2 class="h2-lg"> Entrar </h2>
     <form method="post" action="#" th:action="@{/autenticar}" class="form-center-signin">
       <div class="input-container">
@@ -28,6 +28,7 @@
         <h5><span class="negrito"> Não possui uma conta? <a th:href="@{redirect}" class="text"> Cadastre-se </a> </span> </h5> <!-- th href é o endpoint destino-->
       </div>
     </form>
+    <p th:if="${message}" th:text="${message}" style="color: red;"></p>
   </div>
   
   <script src="js/bootstrap.bundle.min.js"> </script>
