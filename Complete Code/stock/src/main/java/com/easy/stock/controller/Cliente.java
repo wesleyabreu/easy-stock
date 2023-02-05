@@ -1,20 +1,23 @@
 package com.easy.stock.controller;
 
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
 
-//import com.easy.stock.model.Produto;
-import com.easy.stock.repository.DaoUsuario;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
+import com.easy.stock.repository.DaoProduto;
+import com.easy.stock.model.Produto;
 
 
 @Controller
 public class Cliente {
-    
+
     @Autowired
-    private DaoUsuario dao;
+    private DaoProduto daoProduto;
+
+    private ArrayList<Produto> encontrados;
 
     // Direcionar o usuário para SAIR
     
@@ -42,17 +45,19 @@ public class Cliente {
         return "painel-cliente";
     }
 
-    // Listar os produtos Disponíveis aos cliente
+    //  Listar os produtos Disponíveis aos cliente
 
-    //@GetMapping("/todos-produtos")
-    //public String findAllById(List<Integer> id) {
-        
-    //    encontrados = new ArrayList<>(daoProduto.findAllById(id));
-    //
-    //    model.addAttribute("listaEncontrados", encontrados );
-    //
-    //    return "s";
-    //}
+    @GetMapping("/produtos")
+    public String listarProdutos(Model model) {
+
+        encontrados = new ArrayList<>(daoProduto.findAll());
+
+        encontrados.removeIf(element -> element.getQuantidade() == 0);
+
+        model.addAttribute("produtos", encontrados );
+
+        return "listagem-produtos";
+    }
 
 
 

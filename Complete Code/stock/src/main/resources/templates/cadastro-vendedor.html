@@ -17,10 +17,11 @@
 
   <body>
     <header class="container-fluid text-center mt-5">
-      <h1> <a th:href="@{login}" >Easy Stock</a> </h1>
+      <h1> <a th:href="@{painel-vendedor}" >Easy Stock</a> </h1>
     </header>
 
     <main>
+      
       <!-- Início do formulário -->
       <form method="post" action="/cadastrar-vendedor" class="container-fluid mt-5 mb-5 flex-container">
         <h2 class="text-center"> Cadastro Vendedor </h2>
@@ -76,6 +77,8 @@
         </section>
         
       </form><!-- Fim do formulário -->
+
+      <p th:if="${message}" th:text="${message}" style="color: red;"></p>
     </main>
   </body>
 </html>

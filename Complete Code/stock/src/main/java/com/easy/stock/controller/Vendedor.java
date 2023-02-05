@@ -1,6 +1,5 @@
 package com.easy.stock.controller;
 
-import java.util.List;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +28,8 @@ public class Vendedor {
 
     private ArrayList<Produto> encontrados;
 
-    //private Model model;
-
-    // Direcionar o usuário para SAIR
-
-    @RequestMapping("/painel-vendedor")    
+    // Direcionar o usuário para Painel Vendedor
+    @RequestMapping("/painel-vendedor")   
     public String lobbyVendedor(){
         return "painel-vendedor";
     }
@@ -50,35 +46,34 @@ public class Vendedor {
         return "cadastro-vendedor";
     }
 
-    // Registrar usuário - CLIENTE
-    @PostMapping("/cadastrar-vendedor")  
-    public String userRegistration(@ModelAttribute Usuario usuario, Model model){
+    // Registrar usuário - VENDEDOR
+    @PostMapping("/cadastrar-vendedor")
+    public String cadastrarContaVendedor(@ModelAttribute Usuario usuario, Model model){
 
-        usuario.setTipo_conta("Vendedor");   
-        daoUsuario.save(usuario);
+        Usuario user = daoUsuario.findByUsername(usuario.getUsername());
 
-        return "login";   
+
+        // Erro
+        if (user != null) {
+            
+            model.addAttribute("message", "Nome de usuário já existe, use outro.");
+            return "cadastro-vendedor";
+
+        } else {
+
+            usuario.setTipo_conta("Vendedor");   
+            daoUsuario.save(usuario);
+
+            return "login";
+        }
     }
+
 
     // Listar todos os produtos
-    @GetMapping()
-    public String ListarTodosProdutos() {
-        
-        
-
-        return "0";
-    }
-
-    // Listar todos os produtos -- TESTAR ESSE AQUI -- DEVE TÁ ERRADO AINDA
     @GetMapping("/gerenciar")
-    public String exibirTodos(Model model) {
+    public String  listarProdutos(Model model) {
 
         encontrados = new ArrayList<>(daoProduto.findAll());
-
-        for (Produto p:encontrados) {
-            System.out.println(p.getNome());
-            System.out.println(p.getId_produto());
-        }
 
         model.addAttribute("produtos", encontrados );
 

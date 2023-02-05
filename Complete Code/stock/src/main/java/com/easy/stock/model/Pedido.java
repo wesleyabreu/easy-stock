@@ -14,10 +14,10 @@ public class Pedido {
     @Id
     @Column( name = "id_pedido")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_pedido;
+    private Integer idPedido;
 
     @Column( name = "pagamento_status")
-    private String pagamento_status;
+    private String pagamentoStatus;
 
     @Column( name = "orcamento")
     private Float orcamento;
@@ -29,19 +29,19 @@ public class Pedido {
     // Getters And Setters
 
     public Integer getId_pedido() {
-        return id_pedido;
+        return idPedido;
     }
 
     public void setId_pedido(Integer id_pedido) {
-        this.id_pedido = id_pedido;
+        this.idPedido = id_pedido;
     }
 
     public String getPagamento_status() {
-        return pagamento_status;
+        return pagamentoStatus;
     }
 
     public void setPagamento_status(String pagamento_status) {
-        this.pagamento_status = pagamento_status;
+        this.pagamentoStatus = pagamento_status;
     }
 
     public Float getOrcamento() {

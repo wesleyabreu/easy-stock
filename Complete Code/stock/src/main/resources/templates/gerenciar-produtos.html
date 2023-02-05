@@ -72,21 +72,21 @@
                 <tbody>
 					<div th:each="produto: ${produtos}">
 						<tr>
-							<td th:text="${produto.id}"> </td>
+							<td th:text="${produto.idProduto}"> </td>
 							<td th:text="${produto.nome}"> </td>
 							<td th:text="${produto.descricao}"> </td>
 							<td th:text="${produto.preco}"> </td>
 							<td th:text="${produto.quantidade}"> </td>
 							<td>
-								<a th:href="@{#editEmployeeModal{id}(id=${produto.id})}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
-								<a th:href="@{#deleteEmployeeModal{id}(id=${produto.id})}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Deletar">&#xE872;</i></a>
+								<a th:href="@{#editEmployeeModal{id}(id=${produto.idProduto})}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Editar">&#xE254;</i></a>
+								<a th:href="@{#deleteEmployeeModal{id}(id=${produto.idProduto})}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Deletar">&#xE872;</i></a>
 							</td>
 						</tr>
 						<!-- Editar Modal -->
-						<div th:id="'editEmployeeModal'+${produto.id}" class="modal fade">
+						<div th:id="'editEmployeeModal'+${produto.idProduto}" class="modal fade">
 							<div class="modal-dialog">
 								<div class="modal-content">
-									<form method="post" th:action="@{/editar-produto/{id}(id=${produto.id})}" >
+									<form method="post" action="" th:action="@{/editar-produto/{id}(id=${produto.idProduto})}" >
 										<div class="modal-header">						
 											<h4 class="modal-title">Editar Produto</h4>
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -118,10 +118,10 @@
 							</div>
 						</div>
 						<!-- Delete Modal -->
-						<div th:id="'deleteEmployeeModal'+${produto.id}" class="modal fade">
+						<div th:id="'deleteEmployeeModal'+${produto.idProduto}" class="modal fade">
 							<div class="modal-dialog">
 								<div class="modal-content">
-									<form method="post" th:action="@{/deletar-produto/{id}(id=${produto.id})}" >
+									<form method="post" action="" th:action="@{/deletar-produto/{id}(id=${produto.idProduto})}" >
 										<div class="modal-header">						
 											<h4 class="modal-title">Deletar Produto</h4>
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

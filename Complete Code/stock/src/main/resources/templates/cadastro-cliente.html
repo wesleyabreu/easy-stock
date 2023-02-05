@@ -18,7 +18,7 @@
   <body>
 
     <header class="container-fluid text-center mt-5">
-      <h1> <a th:href="@{/}" >Easy Stock</a> </h1>
+      <h1> <a th:href="@{login}" >Easy Stock</a> </h1>
     </header>
 
     <main>
@@ -77,6 +77,8 @@
         </section>
         
       </form><!-- Fim do formulário -->
+
+      <p th:if="${message}" th:text="${message}" style="color: red;"></p>
     </main>
   </body>
 </html>

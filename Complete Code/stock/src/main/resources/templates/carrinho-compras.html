@@ -55,7 +55,7 @@
 						  <h2>Carrinho <b>Compras</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a th:href="@{painel-cliente}" method="post" th:action="/efetuar-pedido" class="btn btn-success" data-toggle="submit"><i class="material-icons">shopping_cart_checkout</i> <span>Efetuar Pedido</span></a>
+						<a th:href="@{painel-cliente}" method="post" action="" th:action="/efetuar-pedido" class="btn btn-success" data-toggle="submit"><i class="material-icons">shopping_cart_checkout</i> <span>Efetuar Pedido</span></a>
 					</div>
           </div>
             </div>
@@ -84,7 +84,7 @@
                     <div th:id="'removeCartModal'+${produto.id}" class="modal fade">
                       <div class="modal-dialog">
                         <div class="modal-content">
-                          <form method="post" th:action="@{/remove-carrinho/{id}(id=${produto.id})}" >
+                          <form method="post" action="" th:action="@{/remove-carrinho/{id}(id=${produto.id})}" >
                             <div class="modal-header">						
                               <h4 class="modal-title">Remover Produto do Carrinho</h4>
                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

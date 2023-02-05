@@ -31,12 +31,12 @@ public class CarrinhoCompras {
     }
 
     @DeleteMapping("/remove-carrinho/{id}")
-    public void removeItem(@PathVariable Float produtoId) {
-        //itens.removeIf(item -> item.getId_produto().equals(produtoId));
+    public void removeProduto(@PathVariable Integer produtoId) {
+        itens.removeIf(item -> item.getId_produto().equals(produtoId));
     }
 
     @GetMapping("/lista-carrinho")
-    public List<Produto> listaItens() {
+    public List<Produto> listarProdutos() {
         return itens;
     }
 
@@ -44,4 +44,6 @@ public class CarrinhoCompras {
     public Double getTotal() {
         return itens.stream().mapToDouble(item -> item.getPreco()).sum();
     }
+
+    // Falta o método de fazer o pedido
 }

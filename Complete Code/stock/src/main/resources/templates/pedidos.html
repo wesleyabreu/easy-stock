@@ -38,10 +38,10 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opções Comprador<span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="Opções Comprador">
                         <li class="nav-item"><a href="carrinho" class="nav-link" type="submit" >Ver Carrinho de Compras</a></li>
-                        <li class="nav-item active"><a href="pedidos" class="nav-link" type="submit" >Ver Pedidos<span class="sr-only">Atual</span></a></a></li>
+                        <li class="nav-item active"><a href="pedidos" class="nav-link" type="submit" >Ver Pedidos<span class="sr-only">Atual</span></a></li>
                     </ul>
                   </li>
-                  <li class="nav-item"><a href="sair" class="nav-link" type="submit" >Sair</li>
+                  <li class="nav-item"><a href="sair" class="nav-link" type="submit" >Sair</a></li>
                 </ul>
             </div>
         </div>
@@ -68,8 +68,8 @@
                 <tbody>
                     <div th:each="pedido: ${pedidos}" >
                         <tr>
-                            <td th:text="${pedido.id}" />
-                            <td th:text="${pedido.valor}" />
+                            <td th:text="${pedido.idPedido}" />
+                            <td th:text="${pedido.orcamento}" />
                             <td th:if="${pedido.pagamento_status == 'Pendente'}" style="color:goldenrod">Pendente</td>
                             <td th:if="${pedido.pagamento_status == 'Pago'}" style="color:green">Pago</td>
                             <td>
@@ -79,7 +79,7 @@
                             </td>
                         </tr>
                         <!-- Modal detalhes pedido -->
-                        <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'detailsModal'+${produto.id}" class="modal fade">
+                        <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'detailsModal'+${produto.idProduto}" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <form>
@@ -90,7 +90,7 @@
                                         <div class="modal-body">	
                                             <div class="form-group">
                                                 <label style="width:65px;display:inline" >ID Pedido</label>
-                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${pedido.id}" readonly>
+                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${pedido.idPedido}" readonly>
                                             </div>
                                             <div class="modal-body">
                                                 <table class="table table-striped table-hover">
@@ -105,7 +105,7 @@
                                                 </div>
                                                 <div>
                                                     <tr th:each="produto: ${produtos}">
-                                                        <td th:text="${produto.id}" />
+                                                        <td th:text="${produto.idProduto}" />
                                                         <td th:text="${produto.nome}" />
                                                         <td th:text="${produto.descricao}" />
                                                         <td th:text="${produto.preco}" />
@@ -176,7 +176,7 @@
                         <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'payModal'+${produto.id}" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form method="post" th:action="@{/pagar-pedido/{id}(id=${pedido.id})}" >
+                                    <form method="post" action="" th:action="@{/pagar-pedido/{id}(id=${pedido.id})}" >
                                         <div class="modal-header">						
                                             <h4 class="modal-title">Efetuar Pagamento</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

@@ -39,17 +39,28 @@ public class Autenticacao {
 
     // Registrar usuário - CLIENTE
     @PostMapping("/cadastrar")              // Endepoint que faz ação de CADASTRAR o cliente
-    public String userRegistration(@ModelAttribute Usuario usuario, Model model){
+    public String criarContaCliente(@ModelAttribute Usuario usuario, Model model){
 
-        usuario.setTipo_conta("Cliente");   // Adiciona o atributo que o usuário não define ( seu tipo de conta)
-        dao.save(usuario);
+        Usuario user = dao.findByUsername(usuario.getUsername());
 
-        return "login";   // Onde vai após o cadastro
+        // Erro
+        if (user != null) {
+            
+            model.addAttribute("message", "Nome de usuário já existe, use outro.");
+            return "cadastro-cliente";
+
+        } else {
+
+            usuario.setTipo_conta("Cliente");   
+            dao.save(usuario);
+
+            return "login";
+        }
     }
 
     // Autenticar o LOGIN
     @PostMapping("/autenticar")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model) { // Esses parâmetros são os que são passados no FORM do HTML
+    public String acessarConta(@RequestParam("username") String username, @RequestParam("password") String password, Model model) { // Esses parâmetros são os que são passados no FORM do HTML
 
     Usuario user = dao.findByUsername(username);    // user =  objeto que recebe as infos do usuario no BD para comparar ( vai receber o usuario que for encontrado pelo "FindByUsername")
 

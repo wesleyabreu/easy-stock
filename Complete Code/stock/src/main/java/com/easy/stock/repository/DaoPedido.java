@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.easy.stock.model.Pedido;
 
+//import com.easy.stock.model.Pedido;
+
 // Interface que extende o repositório CRUD do java SPRING
-/*
-public class DaoPedido extends JpaRepository<Pedido, Integer> {
+
+public interface DaoPedido extends JpaRepository<Pedido, Integer> {
     
-}*/
+}

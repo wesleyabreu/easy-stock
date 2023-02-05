@@ -14,7 +14,7 @@ public class Produto {
     @Id
     @Column( name = "id_produto")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    public Integer idProduto;
 
     @Column( name = "nome")
     private String nome;
@@ -31,11 +31,11 @@ public class Produto {
     // Getters And Setters
 
 	public Integer getId_produto() {
-		return id;
+		return idProduto;
 	}
 
 	public void setId_produto(Integer id) {
-		this.id = id;
+		this.idProduto = id;
 	}
 
 	public String getNome() {
