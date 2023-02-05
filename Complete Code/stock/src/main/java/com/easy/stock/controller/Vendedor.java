@@ -33,6 +33,10 @@ public class Vendedor {
 
     // Direcionar o usuário para SAIR
 
+    @RequestMapping("/painel-vendedor")    
+    public String lobbyVendedor(){
+        return "painel-vendedor";
+    }
 
     // Direcionar o usuário para Ver Carrinho
     @RequestMapping("/historico")    

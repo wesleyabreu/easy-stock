@@ -37,6 +37,11 @@ public class Cliente {
         return "pedidos";
     }
 
+    @RequestMapping("/painel-cliente")    
+    public String lobbyCliente(){
+        return "painel-cliente";
+    }
+
     // Listar os produtos Disponíveis aos cliente
 
     //@GetMapping("/todos-produtos")
