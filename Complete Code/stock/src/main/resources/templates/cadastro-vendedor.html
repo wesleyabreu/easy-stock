@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="" th:href="@{bootstrap.min.css}" >
     <!-- Link css -->
     <link rel="stylesheet" href="" th:href="@{cadastro.css}" >
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Link js -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" defer></script>
     <!--Link icons-->
@@ -17,36 +16,6 @@
   </head>
 
   <body>
-      <!-- NAVBAR -->
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="painel-vendedor" >Conta Vendedor</a>
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuSanduiche" aria-expanded="false">
-                    <span class="sr-only">Menu</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- BRAND -->
-
-            <div class="collapse navbar-collapse" id="menuSanduiche">
-                <!-- Links -->
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opções Vendedor<span class="caret"></span></a>
-                        <ul class="dropdown-menu" aria-labelledby="Opções Vendedor">
-                            <li class="nav-item"><a href="historico" class="nav-link" type="submit" >Ver Histórico de Vendas</a></li>
-                            <li class="nav-item" ><a href="gerenciar" class="nav-link" type="submit" >Gerenciar Produtos</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item active"><a href="cadastro-vendedor" class="nav-link" type="submit" >Cadastrar Vendedor<span class="sr-only">Atual</span></a></li>
-                    <li class="nav-item"><a href="sair" class="nav-link" type="submit" >Sair</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     <header class="container-fluid text-center mt-5">
       <h1> <a th:href="@{login}" >Easy Stock</a> </h1>
     </header>
