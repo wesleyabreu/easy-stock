@@ -29,12 +29,12 @@
           <!-- Username -->
           <div class="mt-3 flex-container">
             <i class="fa regular fa-user-plus icon" style="flex-grow: 1"></i>
-            <input type="text" id="user" name="username"  placeholder="Usuário" class="input" style="flex-grow: 9" required>
+            <input type="text" id="user" name="username" maxlength="45"  placeholder="Usuário" class="input" style="flex-grow: 9" required>
           </div>
           <!-- Nome -->
           <div class="mt-3 flex-container">
             <i class="fa fa-user icon" style="flex-grow: 1"></i>
-            <input type="text" id="nome" name="nome"  placeholder="Nome" class="input" style="flex-grow: 9" required>
+            <input type="text" id="nome" name="nome" maxlength="100"  placeholder="Nome" class="input" style="flex-grow: 9" required>
           </div>
           <!-- CPF -->
           <div class="mt-3 flex-container">
@@ -56,17 +56,17 @@
               }
             </script>
             <i class="fa fa-address-card icon" style="flex-grow: 1"></i>
-            <input oninput="mascara(this)" type="text" id="cpf" name="cpf"  placeholder="CPF" class="input" style="flex-grow: 9" required> 
+            <input oninput="mascara(this)" type="text" id="cpf" name="cpf" minlength="14" placeholder="CPF" class="input" style="flex-grow: 9" required> 
           </div>
           <!-- Endereço -->
           <div class="mt-3 flex-container">
             <i class="fa fa-map-location-dot icon" style="flex-grow: 1"></i>
-            <input type="text" id="endereco" name="endereco"  placeholder="Endereço" class="input" style="flex-grow: 9" required> 
+            <input type="text" id="endereco" name="endereco" maxlength="100"  placeholder="Endereço" class="input" style="flex-grow: 9" required> 
           </div>
           <!-- Senha -->
           <div class="mt-3 flex-container">
             <i class="fas fa-lock icon" style="flex-grow: 1"></i>
-            <input type="password" id="senha" name="password" placeholder="Senha"
+            <input type="password" id="senha" maxlength="45" name="password" placeholder="Senha"
              class="input" style="flex-grow: 9" required>
           </div>
         </section>

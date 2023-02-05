@@ -94,15 +94,15 @@
 										<div class="modal-body">			
 											<div class="form-group">
 												<label>Nome</label>
-												<input type="text" name="nome" class="form-control" th:value="${produto.nome}" required>
+												<input type="text" name="nome" class="form-control" maxlength="45" th:value="${produto.nome}" required>
 											</div>
 											<div class="form-group">
 												<label>Descrição</label>
-												<textarea class="form-control" name="descricao" th:text="${produto.descricao}" required></textarea>
+												<textarea class="form-control" name="descricao" maxlength="100" th:text="${produto.descricao}" required></textarea>
 											</div>
 											<div class="form-group">
 												<label>Preço</label>
-												<input type="number" name="preco" class="form-control" th:value="${produto.preco}" required>
+												<input type="number" min="0.00" max="999999.99" step="0.01" name="preco" class="form-control" th:value="${produto.preco}" required>
 											</div>
 											<div class="form-group">
 												<label>Estoque</label>
@@ -148,22 +148,22 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form method="post" action="/cadastrar-produto">
-					<div class="modal-header">						
+					<div class="modal-header">
 						<h4 class="modal-title">Cadastrar Produto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
 						<div class="form-group">
 							<label>Nome</label>
-							<input type="text" name="nome" class="form-control" required>
+							<input type="text" name="nome" maxlength="45" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Descrição</label>
-                            <textarea class="form-control" name="descricao" required></textarea>
+                            <textarea class="form-control" maxlength="100" name="descricao" required></textarea>
 						</div>
 						<div class="form-group">
 							<label>Preço</label>
-							<input type="number" name="preco" class="form-control" required>
+							<input type="number" min="0.00" max="999999.99" step="0.01" name="preco" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Estoque</label>
