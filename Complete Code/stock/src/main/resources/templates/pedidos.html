@@ -15,37 +15,36 @@
 </head>
 
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-      
-        <!-- BRAND -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#" onclick="document.location='painel-cliente'">Conta Cliente</a>
+
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="painel-cliente" >Conta Cliente</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuSanduiche" aria-expanded="false">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- BRAND -->
+
+            <div class="collapse navbar-collapse" id="menuSanduiche">
+                <!-- Links -->
+                <ul class="nav navbar-nav">
+                  <li class="nav-item"><a href="produtos" class="nav-link" type="submit" >Ver Produtos</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opções Comprador<span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="Opções Comprador">
+                        <li class="nav-item"><a href="carrinho" class="nav-link" type="submit" >Ver Carrinho de Compras</a></li>
+                        <li class="nav-item active"><a href="pedidos" class="nav-link" type="submit" >Ver Pedidos<span class="sr-only">Atual</span></a></a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item"><a href="sair" class="nav-link" type="submit" >Sair</li>
+                </ul>
+            </div>
         </div>
-          
-        <!-- COLLAPSIBLE NAVBAR -->
-        <div class="collapse navbar-collapse" id="alignment-example">
-          
-          <!-- Links -->
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produtos<span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="products">
-                <li><a href="#" onclick="document.location='listagem-produtos'">Ver Produtos </a></li>
-                <li><a href="#" onclick="document.location='carrinho-compras'">Ver Carrinho de Compras</a></li>
-                <li><a href="#" onclick="document.location='#'">Ver Pedidos</a></li>
-              </ul>
-            </li>
-            <li><a href="#" class="sair" type="submit" onclick="document.location='login'">Sair</a></li>
-          </ul>        
-        </div>      
-      </div>
     </nav>
 
     <div class="container">
