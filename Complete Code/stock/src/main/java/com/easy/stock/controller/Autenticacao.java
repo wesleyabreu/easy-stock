@@ -10,17 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.easy.stock.model.Usuario;
+import com.easy.stock.model.CarrinhoCompras;
 import com.easy.stock.repository.DaoUsuario;
+
 
 // Controller da autenticação de usuário
 // HTML related: cadastro-cliente, login
 
 @Controller
 public class Autenticacao {  
-    
+
     @Autowired
     private DaoUsuario dao;             // DAO =  DataBase Acess Object ( é através desse objeto que usamos funções do Repositório CRUD )
     
+    @Autowired
+    private Cliente cliente;
+
+    @Autowired
+    private CarrinhoCompras carrinho;
+
     @GetMapping("/")                    // URL root "/" básica, vai carregar a "login" page HTML - Root, página fonte
     public String indexPage(){
         return "login";                 // Esse return identifica o diretório "templates"
@@ -60,7 +68,7 @@ public class Autenticacao {
 
     // Autenticar o LOGIN
     @PostMapping("/autenticar")
-    public String acessarConta(@RequestParam("username") String username, @RequestParam("password") String password, Model model) { // Esses parâmetros são os que são passados no FORM do HTML
+    public String acessarConta(@RequestParam("username") String username, @RequestParam("password") String password, Model model ) { // Esses parâmetros são os que são passados no FORM do HTML
 
     Usuario user = dao.findByUsername(username);    // user =  objeto que recebe as infos do usuario no BD para comparar ( vai receber o usuario que for encontrado pelo "FindByUsername")
 
@@ -72,6 +80,9 @@ public class Autenticacao {
 
     // Conta cliente
     else if(user.getTipo_conta().equals("Cliente")){
+        cliente.setUsername(user.getUsername());
+        carrinho.limpar();
+        
         return "painel-cliente";
     }
 

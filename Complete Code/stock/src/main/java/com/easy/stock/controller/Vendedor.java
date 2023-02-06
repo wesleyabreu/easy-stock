@@ -13,13 +13,12 @@ import com.easy.stock.model.Usuario;
 import com.easy.stock.repository.DaoProduto;
 import com.easy.stock.repository.DaoUsuario;
 import com.easy.stock.model.Produto;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
 @Controller
-public class Vendedor {
+public class Vendedor extends Usuario {
     
     @Autowired
     private DaoProduto daoProduto;

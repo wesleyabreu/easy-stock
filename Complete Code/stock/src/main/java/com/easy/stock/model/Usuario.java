@@ -2,8 +2,6 @@ package com.easy.stock.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-//import jakarta.persistence.EnumType;
-//import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -13,12 +11,11 @@ public class Usuario extends Pessoa {
         
     @Id
     @Column ( name = "username")
-    private String username;  // Esses nomes tem que dar MATCH com os da "name=..." dos input
+    private String username;
 
     @Column ( name = "password")
     private String password;
 
-    //@Enumerated(EnumType.STRING)        // Talvez remover isso aqui
     @Column ( name = "tipo_conta")
     private String tipo_conta;
 
@@ -46,6 +43,10 @@ public class Usuario extends Pessoa {
 
     public void setTipo_conta(String tipo_conta) {
         this.tipo_conta = tipo_conta;
+    }
+
+    public String listarProdutos(){
+        return null;
     }
 
 }

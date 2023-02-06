@@ -22,6 +22,9 @@ public class Pedido {
     @Column( name = "orcamento")
     private Float orcamento;
 
+    @Column( name = "lista_itens_pedido")
+    private String listaItens;
+
     @Column( name = "id_nota_fiscal")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_nota_fiscal;
@@ -58,6 +61,14 @@ public class Pedido {
 
     public void setId_nota_fiscal(Integer id_nota_fiscal) {
         this.id_nota_fiscal = id_nota_fiscal;
+    }
+
+    public String getListaItens() {
+        return listaItens;
+    }
+
+    public void setListaItens(String listaItens) {
+        this.listaItens = listaItens;
     }
 	
 }

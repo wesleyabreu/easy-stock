@@ -55,7 +55,7 @@
 						  <h2>Carrinho <b>Compras</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a th:href="@{/cliente/pedidos}" method="post" action="" th:action="/api/efetuar-pedido" class="btn btn-success" data-toggle="submit"><i class="material-icons">shopping_cart_checkout</i> <span>Efetuar Pedido</span></a>
+						<a th:href="@{/api/efetuar-pedido}" method="get" action="" th:action="@{/api/efetuar-pedido}" class="btn btn-success" data-toggle="submit"><i class="material-icons">shopping_cart_checkout</i> <span>Efetuar Pedido</span></a>
 					</div>
           </div>
             </div>
@@ -72,19 +72,19 @@
                 <tbody>
                   <div th:each="produto: ${produtos}" >
                     <tr>
-                        <td th:text="${produto.id}" />
+                        <td th:text="${produto.idProduto}" />
                         <td th:text="${produto.nome}" />
                         <td th:text="${produto.descricao}" />
                         <td th:text="${produto.preco}" />
                         <td>
-                            <a th:href="@{#removeCartModal{id}(id=${produto.id})}" class="removeCart" data-toggle="modal"><i class="material-icons" title="Remover do carrinho">remove_shopping_cart</i></a>
+                            <a th:href="@{#removeCartModal{id}(id=${produto.idProduto})}" class="removeCart" data-toggle="modal"><i class="material-icons" title="Remover do carrinho">remove_shopping_cart</i></a>
                         </td>
                     </tr>
                     <!-- Modal adicionado ao carrinho -->
-                    <div th:id="'removeCartModal'+${produto.id}" class="modal fade">
+                    <div th:id="'removeCartModal'+${produto.idProduto}" class="modal fade">
                       <div class="modal-dialog">
                         <div class="modal-content">
-                          <form method="post" action="" th:action="@{/api/remove-carrinho/{id}(id=${produto.id})}" >
+                          <form method="get" action="" th:action="@{/api/remove-carrinho/{id}(id=${produto.idProduto})}" >
                             <div class="modal-header">						
                               <h4 class="modal-title">Remover Produto do Carrinho</h4>
                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

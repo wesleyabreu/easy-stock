@@ -76,8 +76,9 @@
                       <td th:text="${produto.preco}" />
                       <td th:text="${produto.quantidade}" />
                       <td>
-                        <a href="#addCartModal" method="post" action="" th:action="@{/api/add-carrinho/{id}(id=${produto.idProduto})}" class="addCart" data-toggle="modal"><i class="material-icons" title="Adicionar ao carrinho">add_shopping_cart</i></a>
+                        <a th:href="@{/api/add-carrinho/{id}(id=${produto.idProduto})}" method="post" action="" th:action="@{/api/add-carrinho/{id}(id=${produto.idProduto})}" class="addCart" data-toggle="modal"><i class="material-icons" title="Adicionar ao carrinho">add_shopping_cart</i></a>
                       </td>
+                    </td>
                     </tr>
                 </tbody>
             </table>
@@ -87,7 +88,7 @@
 	<div id="addCartModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form method="post" action="" th:action="@{/api/add-carrinho/1}" >
 					<div class="modal-header">						
 						<h4 class="modal-title">Adicionado ao carrinho</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
