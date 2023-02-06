@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import com.easy.stock.model.Usuario;
 import com.easy.stock.repository.DaoProduto;
 import com.easy.stock.repository.DaoUsuario;
+import com.easy.stock.repository.DaoPedido;
 import com.easy.stock.model.Produto;
+import com.easy.stock.model.Pedido;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -26,7 +28,8 @@ public class Vendedor extends Usuario {
     @Autowired
     private DaoUsuario daoUsuario;
 
-    private ArrayList<Produto> encontrados;
+    @Autowired
+    private DaoPedido daoPedido;
 
     // Direcionar o usuário para Painel Vendedor
     @RequestMapping("/painel-vendedor")   
@@ -34,53 +37,18 @@ public class Vendedor extends Usuario {
         return "painel-vendedor";
     }
 
-    // Direcionar o usuário para Ver Carrinho
-    @RequestMapping("/vendedor/historico")    
-    public String clienteCarrinho(){
-        return "historico-vendas-site";
-    }
-
-    // Direcionar o usuário para Ver Pedidos
-    @RequestMapping("/vendedor/cadastro-vendedor")    
-    public String clientePedidos(){
-        return "cadastro-vendedor";
-    }
-
-    // Registrar usuário - VENDEDOR
-    @PostMapping("/api/cadastrar-vendedor")
-    public String cadastrarContaVendedor(@ModelAttribute Usuario usuario, Model model){
-
-        Usuario user = daoUsuario.findByUsername(usuario.getUsername());
-
-
-        // Erro
-        if (user != null) {
-            
-            model.addAttribute("message", "Nome de usuário já existe, use outro.");
-            return "cadastro-vendedor";
-
-        } else {
-
-            usuario.setTipo_conta("Vendedor");   
-            daoUsuario.save(usuario);
-
-            return "login";
-        }
-    }
-
-
-    // Listar todos os produtos
+     // Listar todos os produtos
     @GetMapping("/vendedor/gerenciar")
     public String  listarProdutos(Model model) {
 
-        encontrados = new ArrayList<>(daoProduto.findAll());
+        ArrayList<Produto> encontrados = new ArrayList<>(daoProduto.findAll());
 
         model.addAttribute("produtos", encontrados );
 
         return "gerenciar-produtos";
     }
     
-    // Adicionar Produtos
+    // Cadastrar novos Produtos
     @PostMapping("/api/cadastrar-produto")
     public String cadastrarProduto(@ModelAttribute Produto produto, Model model){
 
@@ -109,6 +77,8 @@ public class Vendedor extends Usuario {
         return "gerenciar-produtos";
     }
 
+
+    //Atualizar os dados de um Produto
     @PostMapping("/api/editar-produto/{id}")
     public String atualizarProduto(@PathVariable Integer id, @ModelAttribute Produto produto) {
 
@@ -117,5 +87,52 @@ public class Vendedor extends Usuario {
 
         return "redirect:/vendedor/gerenciar"; // Redirect para o "gerenciar"
     }
+
+    // Direcionar o usuário para Ver o histórico
+    @RequestMapping("/vendedor/historico")    
+    public String historicoVendas(){
+        return "historico-vendas-site";
+    }
+
+     // Listar historico de vendas
+    @GetMapping("/vendedor/historico")
+    public String listarVendasSite(Model model) {
+
+        ArrayList<Pedido> encontrados = new ArrayList<>(daoPedido.findAll());
+
+        model.addAttribute("vendas", encontrados );
+
+        return "historico-vendas-site";
+    }
+
+    // Direcionar o usuário para cadastrar um novo vendedor
+    @RequestMapping("/vendedor/cadastro-vendedor")    
+    public String cadastrarVendedor(){
+        return "cadastro-vendedor";
+    }
+
+    // Registrar usuário - VENDEDOR
+    @PostMapping("/api/cadastrar-vendedor")
+    public String cadastrarContaVendedor(@ModelAttribute Usuario usuario, Model model){
+
+        Usuario user = daoUsuario.findByUsername(usuario.getUsername());
+
+
+        // Erro
+        if (user != null) {
+            
+            model.addAttribute("message", "Nome de usuário já existe, use outro.");
+            return "cadastro-vendedor";
+
+        } else {
+
+            usuario.setTipo_conta("Vendedor");   
+            daoUsuario.save(usuario);
+
+            return "redirect:/painel-vendedor";
+        }
+    }
+
+
 
 }

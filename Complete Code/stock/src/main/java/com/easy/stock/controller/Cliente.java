@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 import com.easy.stock.repository.DaoProduto;
+import com.easy.stock.repository.DaoUsuario;
 import com.easy.stock.model.Produto;
+import com.easy.stock.model.Pedido;
 import com.easy.stock.model.CarrinhoCompras;
 import com.easy.stock.model.Usuario;
 
@@ -24,9 +26,13 @@ public class Cliente extends Usuario {
     private DaoProduto daoProduto;
 
     @Autowired
-    private CarrinhoCompras carrinho;
+    private DaoProduto daoPedido;
 
-    private ArrayList<Produto> encontrados;
+    @Autowired
+    private DaoUsuario daoUsuario;
+
+    @Autowired
+    private CarrinhoCompras carrinho;
 
 
     // Direcionar o usuário para SAIR    
@@ -61,7 +67,7 @@ public class Cliente extends Usuario {
     @GetMapping("/cliente/produtos")
     public String listarProdutos(Model model) {
 
-        encontrados = new ArrayList<>(daoProduto.findAll());
+        ArrayList<Produto> encontrados = new ArrayList<>(daoProduto.findAll());
 
         encontrados.removeIf(element -> element.getQuantidade() == 0);
 
@@ -104,23 +110,22 @@ public class Cliente extends Usuario {
 
     // Efetuar Pedido
     @GetMapping("/api/efetuar-pedido")
-    public String efetuarPedido() {
+    public String realizarPedido(Model model) {
+        
+        Pedido pedido = carrinho.realizarPedido();
+        
+        Usuario comprador = daoUsuario.findByUsername(getUsername());
 
-        List<Produto> lista = carrinho.listarProdutos();
-        
-        String str = "";
-        for ( Produto p : lista ) {
-            str += p.getNome() + ": R$" + p.getPreco() + "\n" ;
-        }
-        
-        System.out.println(" ================================= ");
-        System.out.println(str);
-        System.out.println(" ================================= ");
+        pedido.setCompradorUsername(comprador.getUsername());
+        pedido.setCompradorNome(comprador.getNome());
+        pedido.setCompradorCPF(comprador.getCpf());
+        pedido.setCompradorEndereco(comprador.getEndereco());
+
+        daoPedido.save(pedido);
         
         carrinho.limpar();
-        // pedido.listaProdutos = str // FAZER TIPO ISSO
 
-        return "redirect:/cliente/carrinho";
+        return "redirect:/cliente/pedidos";
         
     }
 }

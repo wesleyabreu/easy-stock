@@ -66,75 +66,58 @@
                 <tbody>
                     <div th:each="venda: ${vendas}">
                         <tr>
-                            <td th:text="${venda.id}" />
-                            <td th:text="${venda.valor}" />
+                            <td th:text="${venda.idPedido}" />
+                            <td th:text="${venda.orcamento}" />
                             <td>
-                                <a th:href="@{#detailsModal{id}(id=${venda.id})}" class="details" data-toggle="modal"><i class="material-icons" title="Informações do pedido">info</i></a>
+                                <a th:href="@{#detailsModal{id}(id=${venda.idPedido})}" class="details" data-toggle="modal"><i class="material-icons" title="Informações do pedido">info</i></a>
                             </td>
                         </tr>
+                        <!-- Modal detalhes pedido -->
+                        <div th:id="'detailsModal'+${venda.idPedido}" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form>
+                                        <div class="modal-header">						
+                                            <h4 class="modal-title">Detalhes Pedido</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">	
+                                            <div class="form-group">
+                                                <label style="width:65px;display:inline">ID Nota</label>
+                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${venda.idNota}" readonly>
+                                                <label style="width:65px;display:inline" >ID Pedido</label>
+                                                <input style="width:65px;display:inline" type="text" class="form-control" value="${venda.idPedido}" readonly>
+                                            </div>
+                                            <div>
+                                                <p th:text="${venda.listaItens}" ></p>
+                                            </div>
+                                            <div>
+                                                <label>Nome:</label>
+                                                <p style="display: inline" th:text="${venda.compradorNome}"></p>
+                                                </br>
+                                                <label>CPF:</label>
+                                                <p style="display: inline" th:text="${venda.compradorCPF}"></p>
+                                                </br>
+                                                <label>Endereço:</label>
+                                                <p style="display: inline" th:text="${venda.compradorEndereco}"></p>
+                                                </br></br>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Total Pedido</label>
+                                                <input style="width:70px;display:inline" type="text" class="form-control pull-right" th:value="${venda.orcamento}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </tbody>
             </table>
         </div>
-    </div>
-    <!-- Modal detalhes pedido -->
-	<div th:id="'detailsModal'+${venda.id}" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Detalhes Pedido</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">	
-						<div class="form-group">
-                            <label style="width:65px;display:inline">ID Nota</label>
-                            <input style="width:65px;display:inline" type="text" class="form-control" th:value="${venda.id_nota}" readonly>
-                            <label style="width:65px;display:inline" >ID Pedido</label>
-                            <input style="width:65px;display:inline" type="text" class="form-control" value="${venda.id}" readonly>
-						</div>
-                        <div class="modal-body">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Produto ID</th>
-                                        <th>Nome</th>
-                                        <th>Descrição</th>
-                                        <th>Valor</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="produto: ${produtos}">
-                                        <td th:text="${produto.id}" />
-                                        <td th:text="${produto.nome}" />
-                                        <td th:text="${produto.descricao}" />
-                                        <td th:text="${produto.preco}" />
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div>
-                            <label>Nome:</label>
-                            <p style="display: inline" th:text="${venda.comprador_nome}"></p>
-                            </br>
-                            <label>CPF:</label>
-                            <p style="display: inline" th:text="${venda.comprador_cpf}"></p>
-                            </br>
-                            <label>Endereço:</label>
-                            <p style="display: inline" th:text="${venda.comprador_endereco}"></p>
-                            </br></br>
-                        </div>
-                        <div class="form-group">
-                            <label>Total Pedido</label>
-                            <input style="width:70px;display:inline" type="text" class="form-control pull-right" th:value="${venda.valor}" readonly>
-                        </div>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Fechar">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+     </div>
     </body>
 </html>

@@ -41,8 +41,38 @@ public class CarrinhoCompras {
         itens.clear();
     }
 
-    public Double getTotal() {
-        return itens.stream().mapToDouble(item -> item.getPreco()).sum();
+    public Float getTotal() {
+
+        Float soma = null;
+
+        for ( Produto p : itens ) {
+            if (soma == null) {
+                soma = p.getPreco();
+            } else {
+                soma += p.getPreco();
+            }
+        }
+
+        return soma;
+    }
+    
+    public Pedido realizarPedido() {
+
+        String str = "";
+
+        for ( Produto p : itens ) {
+            str += p.getNome() + ": R$" + p.getPreco() + "\n";
+        }
+
+        Pedido pedido = new Pedido();
+
+        pedido.setListaItens(str);
+        pedido.setOrcamento(getTotal());
+        pedido.setPagamento_status("Pendente");
+
+        limpar();
+
+        return pedido;
     }
 
 }

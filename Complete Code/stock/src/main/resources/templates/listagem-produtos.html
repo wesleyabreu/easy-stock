@@ -76,7 +76,7 @@
                       <td th:text="${produto.preco}" />
                       <td th:text="${produto.quantidade}" />
                       <td>
-                        <a th:href="@{/api/add-carrinho/{id}(id=${produto.idProduto})}" method="post" action="" th:action="@{/api/add-carrinho/{id}(id=${produto.idProduto})}" class="addCart" data-toggle="modal"><i class="material-icons" title="Adicionar ao carrinho">add_shopping_cart</i></a>
+                        <a th:href="@{/api/add-carrinho/{id}(id=${produto.idProduto})}" class="addCart" data-toggle="modal"><i class="material-icons" title="Adicionar ao carrinho">add_shopping_cart</i></a>
                       </td>
                     </td>
                     </tr>
@@ -84,25 +84,5 @@
             </table>
         </div>
     </div>
-    <!-- Modal adicionado ao carrinho -->
-	<div id="addCartModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form method="post" action="" th:action="@{/api/add-carrinho/1}" >
-					<div class="modal-header">						
-						<h4 class="modal-title">Adicionado ao carrinho</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">					
-						<p>Produto adicionado ao carrinho de compras com sucesso</p>
-						<p class="text-warning"><small>Verificar o carrinho de compras para efetuar o pedido.</small></p>
-					</div>
-					<div class="modal-footer">
-						<input type="submit" class="btn btn-info" data-dismiss="modal" value="OK">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 </body>
 </html>
