@@ -1,7 +1,7 @@
 package com.easy.stock.controller;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 import com.easy.stock.repository.DaoProduto;
+import com.easy.stock.repository.DaoPedido;
 import com.easy.stock.repository.DaoUsuario;
 import com.easy.stock.model.Produto;
 import com.easy.stock.model.Pedido;
@@ -26,7 +27,7 @@ public class Cliente extends Usuario {
     private DaoProduto daoProduto;
 
     @Autowired
-    private DaoProduto daoPedido;
+    private DaoPedido daoPedido;
 
     @Autowired
     private DaoUsuario daoUsuario;
@@ -51,9 +52,15 @@ public class Cliente extends Usuario {
         return "carrinho-compras";
     }
 
-    // Direcionar o usuário para Ver Pedidos
-    @RequestMapping("/cliente/pedidos")    
-    public String clientePedidos(){
+    @GetMapping("/cliente/pedidos")    
+    public String listarHistoricoCompras(Model model){
+
+        ArrayList<Pedido> encontrados = new ArrayList<>(daoPedido.findAll());
+
+        encontrados.removeIf(element -> !element.getCompradorUsername().equals(getUsername()));
+
+        model.addAttribute("pedidos", encontrados );
+        
         return "pedidos";
     }
 
@@ -124,6 +131,23 @@ public class Cliente extends Usuario {
         daoPedido.save(pedido);
         
         carrinho.limpar();
+
+        return "redirect:/cliente/pedidos";
+        
+    }
+
+    // Pagar Pedido
+    @GetMapping("/api/pagar-pedido/{id}")
+    public String realizarPagamentoPedido(@PathVariable Integer id, Model model ) {
+        
+        Random random =  new Random();
+
+        Pedido pedido = daoPedido.findById(id).orElseThrow();
+
+        pedido.setId_nota_fiscal(random.nextInt(Integer.MAX_VALUE)+1);
+        pedido.setPagamento_status("Pago");
+
+        daoPedido.save(pedido);
 
         return "redirect:/cliente/pedidos";
         

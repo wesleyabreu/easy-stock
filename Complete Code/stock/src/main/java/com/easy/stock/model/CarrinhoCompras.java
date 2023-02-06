@@ -61,7 +61,7 @@ public class CarrinhoCompras {
         String str = "";
 
         for ( Produto p : itens ) {
-            str += p.getNome() + ": R$" + p.getPreco() + "\n";
+            str += p.getNome() + ": R$" + p.getPreco() + " - ";
         }
 
         Pedido pedido = new Pedido();

@@ -73,13 +73,13 @@
                             <td th:if="${pedido.pagamento_status == 'Pendente'}" style="color:goldenrod">Pendente</td>
                             <td th:if="${pedido.pagamento_status == 'Pago'}" style="color:green">Pago</td>
                             <td>
-                                <a th:if="${pedido.pagamento_status == 'Pendente'}" th:href="@{#detailsModal{id}(id=${pedido.id})}" class="details" data-toggle="modal"><i class="material-icons" title="Detalhes do pedido">view_list</i></a>
-                                <a th:if="${pedido.pagamento_status == 'Pendente'}" th:href="@{#payModal{id}(id=${pedido.id})}" class="pay" data-toggle="modal"><i class="material-icons" title="Pagar PIX">pix</i></a>
-                                <a th:if="${pedido.pagamento_status == 'Pago'}" th:href="@{#viewNoteModal{id}(id=${pedido.id})}" class="viewNote" data-toggle="modal"><i class="material-icons" title="Ver nota fiscal">request_quote</i></a>
+                                <a th:if="${pedido.pagamento_status == 'Pendente'}" th:href="@{#detailsModal{id}(id=${pedido.idPedido})}" class="details" data-toggle="modal"><i class="material-icons" title="Detalhes do pedido">view_list</i></a>
+                                <a th:if="${pedido.pagamento_status == 'Pendente'}" th:href="@{#payModal{id}(id=${pedido.idPedido})}" class="pay" data-toggle="modal"><i class="material-icons" title="Pagar PIX">pix</i></a>
+                                <a th:if="${pedido.pagamento_status == 'Pago'}" th:href="@{#viewNoteModal{id}(id=${pedido.idPedido})}" class="viewNote" data-toggle="modal"><i class="material-icons" title="Ver nota fiscal">request_quote</i></a>
                             </td>
                         </tr>
                         <!-- Modal detalhes pedido -->
-                        <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'detailsModal'+${produto.idProduto}" class="modal fade">
+                        <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'detailsModal'+${pedido.idPedido}" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <form>
@@ -93,28 +93,11 @@
                                                 <input style="width:65px;display:inline" type="text" class="form-control" th:value="${pedido.idPedido}" readonly>
                                             </div>
                                             <div class="modal-body">
-                                                <table class="table table-striped table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Produto ID</th>
-                                                            <th>Nome</th>
-                                                            <th>Descrição</th>
-                                                            <th>Valor</th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-                                                <div>
-                                                    <tr th:each="produto: ${produtos}">
-                                                        <td th:text="${produto.idProduto}" />
-                                                        <td th:text="${produto.nome}" />
-                                                        <td th:text="${produto.descricao}" />
-                                                        <td th:text="${produto.preco}" />
-                                                    </tr>
-                                                </table>
+                                                <p th:text="${pedido.listaItens}" ></p>
                                             </div>
                                             <div class="form-group">
                                                 <label>Total Pedido</label>
-                                                <input style="width:70px;display:inline" type="text" class="form-control pull-right" th:value="${pedido.valor}" readonly>
+                                                <input style="width:70px;display:inline" type="text" class="form-control pull-right" th:value="${pedido.orcamento}" readonly>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -125,7 +108,7 @@
                             </div>
                         </div>
                         <!-- Modal nota fiscal -->
-                        <div th:if="${pedido.pagamento_status == 'Pago'}" th:id="'viewNoteModal'+${produto.id}" class="modal fade">
+                        <div th:if="${pedido.pagamento_status == 'Pago'}" th:id="'viewNoteModal'+${pedido.idPedido}" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <form>
@@ -136,33 +119,17 @@
                                         <div class="modal-body">	
                                             <div class="form-group">
                                                 <label style="width:65px;display:inline">ID Nota</label>
-                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${pedido.id_nota}" readonly>
+                                                <input style="width:120px;display:inline" type="text" class="form-control" th:value="${pedido.idNota}" readonly>
                                                 <label style="width:65px;display:inline" >ID Pedido</label>
-                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${pedido.id_pedido}" readonly>
+                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${pedido.idPedido}" readonly>
                                             </div>
                                             <div class="modal-body">
-                                                <table class="table table-striped table-hover">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Produto ID</th>
-                                                            <th>Nome</th>
-                                                            <th>Descrição</th>
-                                                            <th>Valor</th>
-                                                        </tr>
-                                                    </thead>
-                                                </div>
-                                                <div>
-                                                    <tr th:each="produto: ${produtos}">
-                                                        <td th:text="${produto.id}" />
-                                                        <td th:text="${produto.nome}" />
-                                                        <td th:text="${produto.descricao}" />
-                                                        <td th:text="${produto.preco}" />
-                                                    </tr>
-                                                </table>
+                                                <label>Produtos:</label>
+                                                <p style="display: inline" th:text="${pedido.listaItens}" ></p>
                                             </div>
                                             <div class="form-group">
                                                 <label>Total Pedido</label>
-                                                <input style="width:70px;display:inline" type="text" class="form-control pull-right" th:value="${pedido.valor}" readonly>
+                                                <input style="width:70px;display:inline" type="text" class="form-control pull-right" th:value="${pedido.orcamento}" readonly>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -173,10 +140,10 @@
                             </div>
                         </div>
                         <!-- Modal pagamento -->
-                        <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'payModal'+${produto.id}" class="modal fade">
+                        <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'payModal'+${pedido.idPedido}" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form method="post" action="" th:action="@{/api/pagar-pedido/{id}(id=${pedido.id})}" >
+                                    <form method="get" action="" th:action="@{/api/pagar-pedido/{id}(id=${pedido.idPedido})}" >
                                         <div class="modal-header">						
                                             <h4 class="modal-title">Efetuar Pagamento</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

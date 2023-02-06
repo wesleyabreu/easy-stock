@@ -14,7 +14,7 @@ public class Pedido {
     @Id
     @Column( name = "id_pedido")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPedido;
+    public Integer idPedido;
 
     @Column( name = "comprador_username")
     private String compradorUsername;
@@ -30,7 +30,7 @@ public class Pedido {
 
     @Column( name = "id_nota_fiscal")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idNota;
+    public Integer idNota;
 
     @Column( name = "comprador_nome")
     private String compradorNome;
@@ -115,62 +115,3 @@ public class Pedido {
         this.compradorEndereco = compradorEndereco;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-package com.easy.stock.model;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-
-public class Pedido {
-    private final Produto productRepository;
-
-    public CartController(ProductRepository productRepository, ItemRepository itemRepository) {
-        this.productRepository = productRepository;
-        this.itemRepository = itemRepository;
-    }
-
-    @PostMapping("/add")
-    public Item addItem(@RequestParam Long productId, @RequestParam Integer quantity) {
-        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException());
-        Item item = new Item();
-        item.setProductId(productId);
-        item.setQuantity(quantity);
-        return itemRepository.save(item);
-    }
-
-    @DeleteMapping("/remove/{itemId}")
-    public void removeItem(@PathVariable Long itemId) {
-        itemRepository.deleteById(itemId);
-    }
-
-    @GetMapping("/list")
-    public List<Item> listItems() {
-        return itemRepository.findAll();
-    }
-
-    @GetMapping("/total")
-    public Double getTotal() {
-        List<Item> items = itemRepository.findAll();
-        return items.stream().mapToDouble(item -> {
-            Product product = productRepository.findById(item.getProductId()).orElseThrow(() -> new ResourceNotFoundException());
-            return product.getPrice() * item.getQuantity();
-        }).sum();
-    }
-}
-*/

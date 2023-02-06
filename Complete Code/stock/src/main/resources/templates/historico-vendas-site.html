@@ -84,11 +84,12 @@
                                         <div class="modal-body">	
                                             <div class="form-group">
                                                 <label style="width:65px;display:inline">ID Nota</label>
-                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${venda.idNota}" readonly>
+                                                <input style="width:120px;display:inline" type="text" class="form-control" th:value="${venda.idNota}" readonly>
                                                 <label style="width:65px;display:inline" >ID Pedido</label>
-                                                <input style="width:65px;display:inline" type="text" class="form-control" value="${venda.idPedido}" readonly>
+                                                <input style="width:65px;display:inline" type="text" class="form-control" th:value="${venda.idPedido}" readonly>
                                             </div>
                                             <div>
+                                                <label>Produtos:</label>
                                                 <p th:text="${venda.listaItens}" ></p>
                                             </div>
                                             <div>

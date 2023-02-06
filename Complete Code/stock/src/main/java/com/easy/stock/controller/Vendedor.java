@@ -78,7 +78,7 @@ public class Vendedor extends Usuario {
     }
 
 
-    //Atualizar os dados de um Produto
+    // Editar/ Atualizar produtos
     @PostMapping("/api/editar-produto/{id}")
     public String atualizarProduto(@PathVariable Integer id, @ModelAttribute Produto produto) {
 
@@ -90,7 +90,7 @@ public class Vendedor extends Usuario {
 
     // Direcionar o usuário para Ver o histórico
     @RequestMapping("/vendedor/historico")    
-    public String historicoVendas(){
+    public String listarVendasSite(){
         return "historico-vendas-site";
     }
 
@@ -99,6 +99,8 @@ public class Vendedor extends Usuario {
     public String listarVendasSite(Model model) {
 
         ArrayList<Pedido> encontrados = new ArrayList<>(daoPedido.findAll());
+
+        encontrados.removeIf(element -> element.getPagamento_status().equals("Pendente"));
 
         model.addAttribute("vendas", encontrados );
 
