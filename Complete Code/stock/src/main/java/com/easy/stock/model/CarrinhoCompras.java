@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.easy.stock.repository.DaoProduto;
 
 @RestController
-@RequestMapping("/carrinho-compras")
+@RequestMapping("/cliente/carrinho-compras")
 public class CarrinhoCompras {
 
     private final DaoProduto produtoRepository;
@@ -24,23 +24,23 @@ public class CarrinhoCompras {
         this.produtoRepository = produtoRepository;
     }
 
-    @PostMapping("/add-carrinho")
+    @PostMapping("/api/add-carrinho")
     public void addProduto(@RequestParam Integer produtoId) {
         Produto produto = produtoRepository.findById(produtoId).get();
         itens.add(produto);
     }
 
-    @DeleteMapping("/remove-carrinho/{id}")
+    @DeleteMapping("/api/remove-carrinho/{id}")
     public void removeProduto(@PathVariable Integer produtoId) {
         itens.removeIf(item -> item.getId_produto().equals(produtoId));
     }
 
-    @GetMapping("/lista-carrinho")
+    @GetMapping("/api/lista-carrinho")
     public List<Produto> listarProdutos() {
         return itens;
     }
 
-    @GetMapping("/total-carrinho")
+    @GetMapping("/api/total-carrinho")
     public Double getTotal() {
         return itens.stream().mapToDouble(item -> item.getPreco()).sum();
     }

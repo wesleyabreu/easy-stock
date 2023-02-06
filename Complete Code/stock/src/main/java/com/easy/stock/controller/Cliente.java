@@ -23,19 +23,19 @@ public class Cliente {
     
 
     // Direcionar o usuário para Ver Produtos
-    @RequestMapping("/produtos")    
+    @RequestMapping("/cliente/produtos")    
     public String clienteProdutos(){
         return "listagem-produtos";
     }
 
     // Direcionar o usuário para Ver Carrinho
-    @RequestMapping("/carrinho")    
+    @RequestMapping("/cliente/carrinho")    
     public String clienteCarrinho(){
         return "carrinho-compras";
     }
 
     // Direcionar o usuário para Ver Pedidos
-    @RequestMapping("/pedidos")    
+    @RequestMapping("/cliente/pedidos")    
     public String clientePedidos(){
         return "pedidos";
     }
@@ -47,7 +47,7 @@ public class Cliente {
 
     //  Listar os produtos Disponíveis aos cliente
 
-    @GetMapping("/produtos")
+    @GetMapping("/cliente/produtos")
     public String listarProdutos(Model model) {
 
         encontrados = new ArrayList<>(daoProduto.findAll());

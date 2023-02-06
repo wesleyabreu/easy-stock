@@ -20,7 +20,7 @@
       <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="painel-cliente" >Conta Cliente</a>
+                <a class="navbar-brand" href="/painel-cliente" >Conta Cliente</a>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuSanduiche" aria-expanded="false">
                     <span class="sr-only">Menu</span>
                     <span class="icon-bar"></span>
@@ -41,7 +41,7 @@
                         <li class="nav-item active"><a href="pedidos" class="nav-link" type="submit" >Ver Pedidos<span class="sr-only">Atual</span></a></li>
                     </ul>
                   </li>
-                  <li class="nav-item"><a href="sair" class="nav-link" type="submit" >Sair</a></li>
+                  <li class="nav-item"><a href="/sair" class="nav-link" type="submit" >Sair</a></li>
                 </ul>
             </div>
         </div>
@@ -176,7 +176,7 @@
                         <div th:if="${pedido.pagamento_status == 'Pendente'}" th:id="'payModal'+${produto.id}" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form method="post" action="" th:action="@{/pagar-pedido/{id}(id=${pedido.id})}" >
+                                    <form method="post" action="" th:action="@{/api/pagar-pedido/{id}(id=${pedido.id})}" >
                                         <div class="modal-header">						
                                             <h4 class="modal-title">Efetuar Pagamento</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

@@ -19,7 +19,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="painel-vendedor" >Conta Vendedor</a>
+				<a class="navbar-brand" href="/painel-vendedor" >Conta Vendedor</a>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menuSanduiche" aria-expanded="false">
 					<span class="sr-only">Menu</span>
 					<span class="icon-bar"></span>
@@ -40,7 +40,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a href="cadastro-vendedor" class="nav-link" type="submit" >Cadastrar Vendedor</a></li>
-                    <li class="nav-item"><a href="sair" class="nav-link" type="submit" >Sair</a></li>
+                    <li class="nav-item"><a href="/sair" class="nav-link" type="submit" >Sair</a></li>
                 </ul>
 			</div>
 		</div>
@@ -86,7 +86,7 @@
 						<div th:id="'editEmployeeModal'+${produto.idProduto}" class="modal fade">
 							<div class="modal-dialog">
 								<div class="modal-content">
-									<form method="post" action="" th:action="@{/editar-produto/{id}(id=${produto.idProduto})}" >
+									<form method="post" action="" th:action="@{/api/editar-produto/{id}(id=${produto.idProduto})}" >
 										<div class="modal-header">						
 											<h4 class="modal-title">Editar Produto</h4>
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -106,7 +106,7 @@
 											</div>
 											<div class="form-group">
 												<label>Estoque</label>
-												<input type="number" name="quantidade" class="form-control" th:value="${produto.quantidade}" required>
+												<input type="number" name="quantidade" step="1" class="form-control" th:value="${produto.quantidade}" required>
 											</div>					
 										</div>
 										<div class="modal-footer">
@@ -121,7 +121,7 @@
 						<div th:id="'deleteEmployeeModal'+${produto.idProduto}" class="modal fade">
 							<div class="modal-dialog">
 								<div class="modal-content">
-									<form method="DELETE" action="" th:action="@{/deletar-produto/{id}(id=${produto.idProduto})}" >
+									<form method="get" action="" th:action="@{/api/deletar-produto/{id}(id=${produto.idProduto})}" >
 										<div class="modal-header">						
 											<h4 class="modal-title">Deletar Produto</h4>
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -147,7 +147,7 @@
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form method="post" action="/cadastrar-produto">
+				<form method="post" action="/api/cadastrar-produto">
 					<div class="modal-header">
 						<h4 class="modal-title">Cadastrar Produto</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -163,11 +163,11 @@
 						</div>
 						<div class="form-group">
 							<label>Preço</label>
-							<input type="number" min="0.00" max="999999.99" step="0.01" name="preco" class="form-control" required>
+							<input type="number" min="0.00" max="999999.99" step="0.01" name="preco" placeholder="0,00" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Estoque</label>
-							<input type="number" name="quantidade" class="form-control" required>
+							<input type="number" step="1" placeholder="0" name="quantidade" class="form-control" required>
 						</div>					
 					</div>
 					<div class="modal-footer">

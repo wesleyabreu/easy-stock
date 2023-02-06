@@ -1,7 +1,6 @@
 package com.easy.stock.controller;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import com.easy.stock.repository.DaoUsuario;
 import com.easy.stock.model.Produto;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
@@ -38,19 +36,19 @@ public class Vendedor {
     }
 
     // Direcionar o usuário para Ver Carrinho
-    @RequestMapping("/historico")    
+    @RequestMapping("/vendedor/historico")    
     public String clienteCarrinho(){
         return "historico-vendas-site";
     }
 
     // Direcionar o usuário para Ver Pedidos
-    @RequestMapping("/cadastro-vendedor")    
+    @RequestMapping("/vendedor/cadastro-vendedor")    
     public String clientePedidos(){
         return "cadastro-vendedor";
     }
 
     // Registrar usuário - VENDEDOR
-    @PostMapping("/cadastrar-vendedor")
+    @PostMapping("/api/cadastrar-vendedor")
     public String cadastrarContaVendedor(@ModelAttribute Usuario usuario, Model model){
 
         Usuario user = daoUsuario.findByUsername(usuario.getUsername());
@@ -73,7 +71,7 @@ public class Vendedor {
 
 
     // Listar todos os produtos
-    @GetMapping("/gerenciar")
+    @GetMapping("/vendedor/gerenciar")
     public String  listarProdutos(Model model) {
 
         encontrados = new ArrayList<>(daoProduto.findAll());
@@ -84,32 +82,41 @@ public class Vendedor {
     }
     
     // Adicionar Produtos
-    @PostMapping("/cadastrar-produto")
+    @PostMapping("/api/cadastrar-produto")
     public String cadastrarProduto(@ModelAttribute Produto produto, Model model){
 
         daoProduto.save(produto);
 
-        return "redirect:/gerenciar";
+        return "redirect:/vendedor/gerenciar";
         
     }
 
     // Deletar
-    @GetMapping("/deletar-produto/{id}")
+    @GetMapping("/api/deletar-produto/{id}")
     public String excluirProduto( @PathVariable("id") Integer id ){
 
         daoProduto.deleteById(id);
         
-        return "redirect:/gerenciar";
+        return "redirect:/vendedor/gerenciar";
     }
 
-    // Editar produtos
-    @GetMapping("/editar-produto/{id}")
-    public String atualizarProduto( @PathVariable("id") Integer id ){
+    // Editar/ Atualizar produtos
+    @GetMapping("/api/editar-produto/{id}")
+    public String atualizarProduto(@PathVariable Integer id, Model model) {
 
-        // Acrescentar aqui o código
+        Produto produto = daoProduto.findById(id).orElseThrow();
+        model.addAttribute("produto", produto); // Objeto Produto modificável
 
-        return "redirect:/gerenciar";
+        return "gerenciar-produtos";
+    }
 
+    @PostMapping("/api/editar-produto/{id}")
+    public String atualizarProduto(@PathVariable Integer id, @ModelAttribute Produto produto) {
+
+        produto.setId_produto(id);
+        daoProduto.save(produto);
+
+        return "redirect:/vendedor/gerenciar"; // Redirect para o "gerenciar"
     }
 
 }
