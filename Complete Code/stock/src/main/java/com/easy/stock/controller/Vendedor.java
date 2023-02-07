@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-// Controller das ações atribuidas a Usuários Tipo Vendedor
-
 @Controller
 public class Vendedor extends Usuario {
     

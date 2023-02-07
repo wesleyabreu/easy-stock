@@ -15,6 +15,7 @@ import com.easy.stock.repository.DaoUsuario;
 
 
 // Controller da autenticação de usuário
+// HTML related: cadastro-cliente, login
 
 @Controller
 public class Autenticacao {  
