@@ -5,6 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+
+import java.util.List;
+
 import jakarta.persistence.Column;
 
 @Entity
@@ -25,9 +29,6 @@ public class Pedido {
     @Column( name = "orcamento")
     private Float orcamento;
 
-    @Column( name = "lista_itens_pedido")
-    private String listaItens;
-
     @Column( name = "id_nota_fiscal")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer idNota;
@@ -41,6 +42,14 @@ public class Pedido {
     @Column( name = "comprador_endereco")
     private String compradorEndereco;
 
+    @JoinColumn(name = "lista_itens_pedido",nullable=false)
+    private Integer listaItens;
+    
+    private List<Produto> listaProdutos;
+
+    public void setLista(List<Produto> lista) {
+        listaProdutos = lista;
+    }
     // Getters And Setters
 
     public Integer getId_pedido() {
@@ -73,14 +82,6 @@ public class Pedido {
 
     public void setId_nota_fiscal(Integer id_nota_fiscal) {
         this.idNota = id_nota_fiscal;
-    }
-
-    public String getListaItens() {
-        return listaItens;
-    }
-
-    public void setListaItens(String listaItens) {
-        this.listaItens = listaItens;
     }
 	
     public String getCompradorUsername() {

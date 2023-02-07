@@ -58,15 +58,9 @@ public class CarrinhoCompras {
     
     public Pedido realizarPedido() {
 
-        String str = "";
-
-        for ( Produto p : itens ) {
-            str += p.getNome() + ": R$" + p.getPreco() + " - ";
-        }
-
         Pedido pedido = new Pedido();
 
-        pedido.setListaItens(str);
+        pedido.setLista(itens);
         pedido.setOrcamento(getTotal());
         pedido.setPagamento_status("Pendente");
 

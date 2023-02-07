@@ -89,8 +89,23 @@
                                                 <input style="width:65px;display:inline" type="text" class="form-control" th:value="${venda.idPedido}" readonly>
                                             </div>
                                             <div>
-                                                <label>Produtos:</label>
-                                                <p th:text="${venda.listaItens}" ></p>
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID Pedido</th>
+                                                        <th>Nome</th>
+                                                        <th>Descrição</th>
+                                                        <th>Preço</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <div th:each="produto: ${produtos}" >
+                                                        <tr>
+                                                        <td th:text="${produto.idPedido}" />
+                                                        <td th:text="${produto.nome}" />
+                                                        <td th:text="${produto.descricao}" />
+                                                        <td th:text="${produto.preco}" />
+                                                    </tr>
+                                                </div>
                                             </div>
                                             <div>
                                                 <label>Nome:</label>

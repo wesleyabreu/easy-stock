@@ -59,10 +59,12 @@ public class Cliente extends Usuario {
     public String listarHistoricoCompras(Model model){
 
         ArrayList<Pedido> encontrados = new ArrayList<>(daoPedido.findAll());
+        ArrayList<Produto> encontradosP = new ArrayList<>(daoPedido.findProdutoList());
 
         encontrados.removeIf(element -> !element.getCompradorUsername().equals(getUsername()));
 
         model.addAttribute("pedidos", encontrados );
+        model.addAttribute("produtos", encontradosP );
         
         return "pedidos";
     }
