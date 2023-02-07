@@ -19,10 +19,12 @@ import com.easy.stock.model.Usuario;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+// Controller das ações atribuidas a Usuários tipo Cliente
 
 @Controller
 public class Cliente extends Usuario {
 
+    // Injection do DAO's ( Para operar nos bancos de dados desses models usando esses DAO's )
     @Autowired
     private DaoProduto daoProduto;
 
@@ -32,6 +34,7 @@ public class Cliente extends Usuario {
     @Autowired
     private DaoUsuario daoUsuario;
 
+    // Injection para utilizar o @Bean declarado no "Configuration". Ele atua como um objeto que tem sua memória por sessão.
     @Autowired
     private CarrinhoCompras carrinho;
 
