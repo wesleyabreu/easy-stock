@@ -48,8 +48,6 @@ public class TesteCadastroProduto {
         // Submetendo o formulário
         WebElement cadastrarButton = modalContent.findElement(By.cssSelector("input[type='submit']"));
         cadastrarButton.click();
-
-        // Aguardando 5 segundos para visualizar o resultado
         
 
         // Fechando o driver

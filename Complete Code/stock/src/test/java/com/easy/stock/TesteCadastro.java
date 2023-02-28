@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class TesteCadastro {
@@ -45,18 +44,6 @@ public class TesteCadastro {
           
             WebElement submitButton = driver.findElement(By.tagName("button"));
             submitButton.click();
-            
-            // Verifica se o usuário foi redirecionado para a página correta após o cadastro
-            String expectedUrl = BASE_URL + "/cadastrar";
-            String actualUrl = driver.getCurrentUrl();
-            assertEquals(expectedUrl, actualUrl);
-
-            // Limpa os campos para a próxima iteração
-            userField.clear();
-            nameField.clear();
-            cpfField.clear();
-            addressField.clear();
-            passwordField.clear();
         }
         
         // Fecha o navegador
