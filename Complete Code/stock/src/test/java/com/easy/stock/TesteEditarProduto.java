@@ -21,20 +21,20 @@ public class TesteEditarProduto {
         driver.get("http://localhost:8080/vendedor/gerenciar");
 
         // Encontrando o botão que abre o modal
-        WebElement botao = driver.findElement(By.cssSelector("a[href='#editEmployeeModal1']"));
+        WebElement botao = driver.findElement(By.cssSelector("a[href='#editEmployeeModal8']"));
 
         // Clicando no botão
         botao.click();
 
         try {
-            // Aguardando 5 segundos
+            // Aguardando 3 segundos
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             System.out.println("A thread foi interrompida enquanto estava em estado de espera");
         }
 
         // Preenchendo o formulário
-        WebElement modalContent = driver.findElement(By.id("editEmployeeModal1"));
+        WebElement modalContent = driver.findElement(By.id("editEmployeeModal8"));
         WebElement nomeInput = modalContent.findElement(By.name("nome"));
         WebElement descricaoTextarea = modalContent.findElement(By.name("descricao"));
         WebElement precoInput = modalContent.findElement(By.name("preco"));

@@ -19,7 +19,7 @@ public class TesteDeletarProduto {
 
         driver.get("http://localhost:8080/vendedor/gerenciar");
         // Encontrando o botão que abre o modal
-        WebElement botao = driver.findElement(By.cssSelector("a[href='#deleteEmployeeModal6']"));
+        WebElement botao = driver.findElement(By.cssSelector("a[href='#deleteEmployeeModal8']"));
 
         // Clicando no botão
         botao.click();
@@ -32,9 +32,9 @@ public class TesteDeletarProduto {
         }
 
         // Localizar o elemento form que contém o botão "Deletar"
-        WebElement form = driver.findElement(By.cssSelector("form[action*='/api/deletar-produto/']"));
+        WebElement form = driver.findElement(By.cssSelector("form[action*='/api/deletar-produto/8']"));
 
-        WebElement deletar = form.findElement(By.id("deletar-botao"));
+        WebElement deletar = form.findElement(By.cssSelector("input[type='submit']"));
         deletar.click();
 
     }

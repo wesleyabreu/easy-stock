@@ -39,6 +39,6 @@ public class TesteLogin {
         WebElement loginButton = driver.findElement(By.tagName("button"));
         loginButton.click();
 
-        Assertions.assertEquals("http://localhost:8080/painel-vendedor", driver.getCurrentUrl());
+        Assertions.assertEquals("http://localhost:8080/painel-cliente", driver.getCurrentUrl());
     }
 }
